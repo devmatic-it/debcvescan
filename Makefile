@@ -7,8 +7,11 @@
 TARGET= ./cmd/debcvescan
 GOBASE=$(shell pwd)
 GOPATH=$(GOBASE)
-GOBIN=$(GOBASE)/bin
+GOBIN=$(GOBASE)/build
 GOFILES=$(wildcard *.go)
+PKG := "github.com/devmatic-it/debcvescan"
+PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
+GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 
 all:  compile
 
@@ -23,6 +26,10 @@ install:
 	@echo "Building binary..."
 	GOBIN=$(GOBIN) go install $(TARGET)
 	
+test-coverage:
+	@go test -short -coverprofile cover.out -covermode=atomic ${PKG_LIST} 
+	@cat cover.out >> coverage.txt
+
 clean:
 	@echo "Cleanup dependencies..."	
 	rm -Rf ./src/github.com 
