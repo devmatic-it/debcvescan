@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "/Users/bator/Documents/go/debcvescan"
+		},	
+	],
+	"settings": {
+		"go.useLanguageServer": true
+	}
+}
