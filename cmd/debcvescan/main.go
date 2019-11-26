@@ -53,7 +53,7 @@ func displayVulnerability(vul analyzer.Vulnerability) {
 // analyzes installed packages
 func analyze() []analyzer.Vulnerability {
 	// load installed packages
-	installedPackages := dpkg.LoadInstalledPackages("/Users/bator/Documents/go/debcvescan/data/dpkg/status")
+	installedPackages := dpkg.LoadInstalledPackages("/var/lib/dpkg/status")
 	// scan for vulnerabilties
 	vulnerabilities := analyzer.ScanPackages(installedPackages)
 	return vulnerabilities
