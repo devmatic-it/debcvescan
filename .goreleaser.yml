@@ -23,3 +23,22 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+
+nfpms:  
+  - id: debcvescan
+    package_name: debcvescan
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    builds:
+    - debcvescan    
+
+    vendor: Devmatic IT
+    homepage: https://github.com/devmatic-it/debcvescan
+    maintainer: F. Bator <bator@devmatic-it.com>
+    description: CVE Security Scanner for Debian Linux distributions using official Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>.
+    license: Apache 2.0
+
+    # Formats to be generated.
+    formats:
+      - deb
+      
+    bindir: /usr/bin
