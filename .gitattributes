@@ -1,1 +1,2 @@
 *.go -text diff=golang
+Makefile linguist-detectable=false
