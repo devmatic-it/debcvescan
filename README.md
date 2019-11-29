@@ -57,3 +57,4 @@ This work has ben inspired by the following open source projects:
 - CoreOS Clair Project (<https://github.com/coreos/clair/)> 
 - Debsescan Security Scanner (<https://gitlab.com/fweimer/debsecan)>
 - GoRleaser Builder Image (<https://github.com/goreleaser/goreleaser)>
+- Building a basic CI/CD pipeline for a Golang application using GitHub Actions<https://dev.to/brpaz building-a-basic-ci-cd-pipeline-for-a-golang-application-using-github-actions-icj>
