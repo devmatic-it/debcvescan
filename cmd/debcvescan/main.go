@@ -24,8 +24,21 @@ import (
 	"strings"
 )
 
+// number of columns to be displayed per line
 var displayColumns int
+
+// display format, can be text or json
 var displayFormat string
+
+// scan command
+var scanCommand *flag.FlagSet
+
+// init initializes tge command line arguments
+func init() {
+	scanCommand = flag.NewFlagSet("scan", flag.ExitOnError)
+	scanCommand.IntVar(&displayColumns, "line-length", 128, "number of columns displayed on screen")
+	scanCommand.StringVar(&displayFormat, "format", "text", "display format")
+}
 
 // displays a help messag
 func displayHelp() {
@@ -37,6 +50,7 @@ func displayHelp() {
 	fmt.Println("  debcvescan scan|cve|pkg [<CVE>|<package>] [OPTIONS]")
 	fmt.Println()
 	flag.PrintDefaults()
+	scanCommand.PrintDefaults()
 	os.Exit(1)
 }
 
@@ -61,9 +75,6 @@ func analyze() []analyzer.Vulnerability {
 
 // scans existing packages and prints out a summary report
 func executeScan() {
-	scanCommand := flag.NewFlagSet("scan", flag.ContinueOnError)
-	scanCommand.IntVar(&displayColumns, "line-length", 128, "number of columns displayed on screen")
-	scanCommand.StringVar(&displayFormat, "format", "text", "display format")
 	scanCommand.Parse(os.Args[2:])
 
 	vulnerabilties := analyze()
@@ -131,7 +142,6 @@ func excecutePackage() {
 
 // main entry point
 func main() {
-
 	if len(os.Args) < 2 {
 		displayHelp()
 	}

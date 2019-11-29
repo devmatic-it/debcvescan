@@ -7,7 +7,7 @@
 TARGET= ./cmd/debcvescan
 GOBASE=$(shell pwd)
 GOPATH=$(GOBASE)
-GOBIN=$(GOBASE)/build
+GOBIN=$(GOBASE)/dist
 GOFILES=$(wildcard *.go)
 PKG := "github.com/devmatic-it/debcvescan"
 PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
