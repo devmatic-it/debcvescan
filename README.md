@@ -20,13 +20,13 @@ We want to provide the same features as the debsescan without dependencies to py
 ### Binary
 
 1. Download latest release for your platform: <https://github.com/devmatic-it/debcvescan/releases/latest>
-2. extract archive: `tar xvfz debcvescan_X.Y.Z_amd64.tgz`
+2. extract archive: `tar xvfz debcvescan_X.Y.Z_linux_amd64.tgz`
 3. scan system for vulnerabilities: `debcvescan scan`
 
 ### Debian package
 
 1. Download latest release for your platform: <https://github.com/devmatic-it/debcvescan/releases/latest>
-2. extract archive: `dpkg -i debcvescan_X.Y.Z_amd64.tgz`
+2. extract archive: `dpkg -i debcvescan_X.Y.Z_linux_amd64.deb`
 3. scan system for vulnerabilities: `debcvescan scan`
 
 ## Getting Started
