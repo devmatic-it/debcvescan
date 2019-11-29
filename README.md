@@ -2,6 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/devmatic-it/debcvescan)](https://goreportcard.com/report/github.com/devmatic-it/debcvescan)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/devmatic-it/debcvescan/blob/master/LICENSE)
+[![codecov](https://codecov.io/gh/devmatic-it/debcvescan/branch/master/graph/badge.svg)](https://codecov.io/gh/devmatic-it/debcvescan)
 
 The following project checks the installed packages of your Debian Linux distribution against known vulnerabilities of the Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>
 
