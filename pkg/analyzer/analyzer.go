@@ -37,7 +37,7 @@ const (
 
 	// LOW  low severity
 	LOW
-	// UNKNOWN unkown impact
+	// UNKNOWN unknown impact
 	UNKNOWN
 
 	// IGNORE end of life and outdated issues
@@ -45,7 +45,7 @@ const (
 )
 
 func (serverity Severity) String() string {
-	return [...]string{"OPEN", "HIGH", "MEDIUM", "LOW", "UNKOWN", "IGNORE"}[serverity]
+	return [...]string{"OPEN", "HIGH", "MEDIUM", "LOW", "UNKNOWN", "IGNORE"}[serverity]
 }
 
 // Vulnerability contains a vulnerability

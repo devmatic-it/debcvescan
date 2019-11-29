@@ -31,7 +31,7 @@ var displayFormat string
 func displayHelp() {
 	fmt.Println("Debian CVE Scanner")
 	fmt.Println()
-	fmt.Println("fetches the latest vulnerabilties from the offical Debian CVE tracker and displays the results with the installed packages.")
+	fmt.Println("fetches the latest vulnerabilties from the official Debian CVE tracker and displays the results with the installed packages.")
 	fmt.Println()
 	fmt.Println("Usage:")
 	fmt.Println("  debcvescan scan|cve|pkg [<CVE>|<package>] [OPTIONS]")
@@ -40,7 +40,7 @@ func displayHelp() {
 	os.Exit(1)
 }
 
-// displays detailed description of the given vulnerabilty
+// displays detailed description of the given vulnerability
 func displayVulnerability(vul analyzer.Vulnerability) {
 	fmt.Println(vul.CVE)
 	fmt.Printf("Package: %s\n", vul.PackageName)
