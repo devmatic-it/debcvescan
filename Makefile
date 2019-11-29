@@ -15,7 +15,7 @@ GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 
 all:  compile
 
-compile: get install
+compile: get install test-coverage
 
 get:
 	@echo "Downloading dependencies..."	
