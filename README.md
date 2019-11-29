@@ -31,9 +31,24 @@ We want to provide the same features as the debsescan without dependencies to py
 3. Get details for a specific vulnerabitities: `debcvescan cve CVE-12345`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_cve.png)
 
+4. export scan report to JSON: `debcvescan scan --format=json`
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_scan_json.png)
+
 ## Contribute
 
-TODO
+### New Issues
+
+1. Use the search tool before opening a new issue: <https://github.com/devmatic-it/debcvescan/issues>
+2. Please provide source code and commit fix if you found a bug.
+3. Review existing issues and provide feedback or react to them.
+
+### Pull requests
+
+1. Open your pull request against master:  <https://github.com/devmatic-it/debcvescan/pulls>
+2. Your pull request should have no more than two commits, if not you should squash them.
+3. It should pass all tests in the available continuous integrations systems such as TravisCI.
+4. You should add/modify tests to cover your proposed code changes.
+5. If your pull request contains a new feature, please document it on the <https://github.com/devmatic-it/debcvescan/blob/master/README.md>
 
 ## Credits
 
