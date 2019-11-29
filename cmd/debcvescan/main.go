@@ -62,7 +62,7 @@ func analyze() []analyzer.Vulnerability {
 // scans existing packages and prints out a summary report
 func executeScan() {
 	scanCommand := flag.NewFlagSet("scan", flag.ContinueOnError)
-	scanCommand.IntVar(&displayColumns, "cols", 128, "number of columns displayed on screen")
+	scanCommand.IntVar(&displayColumns, "line-length", 128, "number of columns displayed on screen")
 	scanCommand.StringVar(&displayFormat, "format", "text", "display format")
 	scanCommand.Parse(os.Args[2:])
 
