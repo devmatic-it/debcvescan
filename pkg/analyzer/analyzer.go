@@ -37,8 +37,8 @@ const (
 
 	// LOW  low severity
 	LOW
-	// UNKOWN unkown impact
-	UNKOWN
+	// UNKNOWN unkown impact
+	UNKNOWN
 
 	// IGNORE end of life and outdated issues
 	IGNORE
@@ -85,13 +85,13 @@ func severityFromUrgency(urgency string) Severity {
 		return HIGH
 
 	case "not yet assigned":
-		return UNKOWN
+		return UNKNOWN
 
 	case "end-of-life", "unimportant":
 		return IGNORE
 
 	default:
-		return UNKOWN
+		return UNKNOWN
 	}
 }
 
