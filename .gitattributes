@@ -1,4 +1,1 @@
-*.go linguist-detectable=true
-*.yaml linguist-detectable=false
-*.md linguist-detectable=false
-*.json linguist-detectable=false
+*.go -text diff=golang
