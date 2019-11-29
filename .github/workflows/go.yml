@@ -19,8 +19,7 @@ jobs:
     - name: Build
       run: make
 
-    - name: codecov upload
-    - uses: actions/checkout@master
-    - uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }} #required
+    - name: codecov upload     
+      uses: codecov/codecov-action@v1
+       with:
+         token: ${{ secrets.CODECOV_TOKEN }} #required
