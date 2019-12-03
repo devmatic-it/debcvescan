@@ -17,6 +17,7 @@ package dpkg
 import (
 	"bufio"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -66,6 +67,7 @@ func LoadInstalledPackages(path string) PackageList {
 
 // IsAffectedVersion returns true, if the current version < fixed version
 func IsAffectedVersion(current, fixed string) bool {
+	re := regexp.MustCompile(`[a-z ]`)
 	currentTags := strings.Split(strings.ReplaceAll(current, "-", "."), ".")
 	fixedTags := strings.Split(strings.ReplaceAll(fixed, "-", "."), ".")
 	count := len(fixedTags)
@@ -74,8 +76,11 @@ func IsAffectedVersion(current, fixed string) bool {
 	}
 
 	for i := 0; i < count; i++ {
-		curVer, err1 := strconv.Atoi(currentTags[i])
-		fixedVer, err2 := strconv.Atoi(fixedTags[i])
+		curTag := re.ReplaceAllString(currentTags[i], "")
+		curVer, err1 := strconv.Atoi(curTag)
+
+		fixedTag := re.ReplaceAllString(fixedTags[i], "")
+		fixedVer, err2 := strconv.Atoi(fixedTag)
 
 		if err1 == nil && err2 == nil {
 			if curVer < fixedVer {

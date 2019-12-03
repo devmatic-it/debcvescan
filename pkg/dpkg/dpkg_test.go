@@ -40,6 +40,12 @@ func TestIsAffectedVersion_false3(t *testing.T) {
 	}
 }
 
+func TestIsAffectedVersion_false4(t *testing.T) {
+	if IsAffectedVersion(" 1.29b-2ubuntu0.1", "1.15.1-3") {
+		t.Fail()
+	}
+}
+
 func TestLoadInstalledPackages1(t *testing.T) {
 	packages := LoadInstalledPackages("../../data/dpkg/status")
 	if packages == nil {
