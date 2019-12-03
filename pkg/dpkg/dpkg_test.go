@@ -46,6 +46,12 @@ func TestIsAffectedVersion_false4(t *testing.T) {
 	}
 }
 
+func TestIsAffectedVersion_false5(t *testing.T) {
+	if IsAffectedVersion("2.9.4+dfsg1-6.1ubuntu1.2", "2.9.2+really2.9.1+dfsg1-0.1") {
+		t.Fail()
+	}
+}
+
 func TestLoadInstalledPackages1(t *testing.T) {
 	packages := LoadInstalledPackages("../../data/dpkg/status")
 	if packages == nil {

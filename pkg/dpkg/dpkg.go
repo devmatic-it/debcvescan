@@ -67,9 +67,10 @@ func LoadInstalledPackages(path string) PackageList {
 
 // IsAffectedVersion returns true, if the current version < fixed version
 func IsAffectedVersion(current, fixed string) bool {
-	re := regexp.MustCompile(`[a-z ]`)
-	currentTags := strings.Split(strings.ReplaceAll(current, "-", "."), ".")
-	fixedTags := strings.Split(strings.ReplaceAll(fixed, "-", "."), ".")
+	re := regexp.MustCompile(`[a-z+ ]`)
+	reSep := regexp.MustCompile(`-:`)
+	currentTags := strings.Split(reSep.ReplaceAllString(current, "."), ".")
+	fixedTags := strings.Split(reSep.ReplaceAllString(fixed, "."), ".")
 	count := len(fixedTags)
 	if count > len(currentTags) {
 		count = len(currentTags)
