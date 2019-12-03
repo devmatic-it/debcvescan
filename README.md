@@ -32,16 +32,16 @@ We want to provide the same features as the debsescan without dependencies to py
 ## Getting Started
 
 1. Execute scanning: `debcvescan scan`
-![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_scan.png)
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_scan.png)
 
 2. Scan a specific package for vulnerabilities: `debcvescan pkg vim`
-![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_pkg.png)
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_pkg.png)
 
 3. Get details for a specific vulnerabitities: `debcvescan cve CVE-12345`
-![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_cve.png)
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_cve.png)
 
 4. export scan report to JSON: `debcvescan scan --format=json`
-![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/debcvescan_scan_json.png)
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_scan_json.png)
 
 ## Contribute
 
