@@ -52,6 +52,17 @@ func TestIsAffectedVersion_false5(t *testing.T) {
 	}
 }
 
+func TestIsAffectedVersion_false6(t *testing.T) {
+	if IsAffectedVersion("2.30-21ubuntu1~18.04.2", "2.27.51.20161102-1") {
+		t.Fail()
+	}
+}
+
+func TestIsAffectedVersion_epoche_false1(t *testing.T) {
+	if IsAffectedVersion("2:8.0.1453-1ubuntu1.1", "1:7.1.314-3") {
+		t.Fail()
+	}
+}
 func TestLoadInstalledPackages1(t *testing.T) {
 	packages := LoadInstalledPackages("../../data/dpkg/status")
 	if packages == nil {
