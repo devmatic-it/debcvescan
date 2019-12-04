@@ -82,7 +82,13 @@ func executeScan() {
 	if displayFormat == "text" {
 		// report vulnerabilities
 		for _, vul := range vulnerabilties {
-			fmt.Printf("%-12s %-6s %s: %s \n", vul.PackageName, vul.Severity, vul.CVE, vul.Description[:displayColumns])
+
+			maxLen := len(vul.Description)
+			if displayColumns < maxLen {
+				maxLen = displayColumns
+			}
+
+			fmt.Printf("%-12s %-6s %s: %s \n", vul.PackageName, vul.Severity, vul.CVE, vul.Description[:maxLen])
 		}
 	} else if displayFormat == "json" {
 		data, err := json.MarshalIndent(vulnerabilties, "", "  ")
