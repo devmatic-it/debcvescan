@@ -1,0 +1,6 @@
+github.com/kjk/lzma v0.0.0-20161016003348-3fd93898850d/go.mod h1:phT/jsRPBAEqjAibu1BurrabCBNTYiVI+zbmyCZJY6Q=
+github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8/go.mod h1:HUYIGzjTL3rfEspMxjDjgmT5uz5wzYJKVo23qUhYTos=
+golang.org/x/crypto v0.0.0-20190103213133-ff983b9c42bc/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+pault.ag/go/debian v0.0.0-20190530135403-b831f604d664 h1:GDl2DtfgRo7vwwoJifnkaG97iy0JnOFqxi+qePf+1nk=
+pault.ag/go/debian v0.0.0-20190530135403-b831f604d664/go.mod h1:e7Gva9AMoKtUKYJ1G9kIesbh+4VS2JnAOS8VWafyTCk=
+pault.ag/go/topsort v0.0.0-20160530003732-f98d2ad46e1a/go.mod h1:INqx0ClF7kmPAMk2zVTX8DRnhZ/yaA/Mg52g8KFKE7k=

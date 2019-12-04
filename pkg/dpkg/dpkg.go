@@ -17,8 +17,7 @@ package dpkg
 import (
 	"bufio"
 	"os"
-	"regexp"
-	"strconv"
+	"pault.ag/go/debian/version"
 	"strings"
 )
 
@@ -67,30 +66,15 @@ func LoadInstalledPackages(path string) PackageList {
 
 // IsAffectedVersion returns true, if the current version < fixed version
 func IsAffectedVersion(current, fixed string) bool {
-	re := regexp.MustCompile(`[a-z+ ]`)
-	currentEpoch := strings.ReplaceAll(current, ":", ".")
-	fixedEpoch := strings.ReplaceAll(fixed, ":", ".")
-	currentTags := strings.Split(strings.ReplaceAll(currentEpoch, "-", "."), ".")
-	fixedTags := strings.Split(strings.ReplaceAll(fixedEpoch, "-", "."), ".")
-	count := len(fixedTags)
-	if count > len(currentTags) {
-		count = len(currentTags)
-	}
 
-	for i := 0; i < count; i++ {
-		curTag := re.ReplaceAllString(currentTags[i], "")
-		curVer, err1 := strconv.Atoi(curTag)
+	currentVersion, err1 := version.Parse(current)
+	fixedVersion, err2 := version.Parse(fixed)
 
-		fixedTag := re.ReplaceAllString(fixedTags[i], "")
-		fixedVer, err2 := strconv.Atoi(fixedTag)
-
-		if err1 == nil && err2 == nil {
-			if curVer < fixedVer {
-				return true
-			} else if curVer > fixedVer {
-				return false
-			}
+	if err1 == nil && err2 == nil {
+		if version.Compare(currentVersion, fixedVersion) < 0 {
+			return true
 		}
 	}
+
 	return false
 }
