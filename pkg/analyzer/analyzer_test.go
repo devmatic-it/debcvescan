@@ -19,7 +19,42 @@ import (
 	"testing"
 
 	"github.com/devmatic-it/debcvescan/pkg/dpkg"
+	"gopkg.in/h2non/gock.v1"
 )
+
+func TestScanPackages(t *testing.T) {
+	packages := dpkg.LoadInstalledPackages("../../data/dpkg/status")
+	if packages == nil {
+		t.Fail()
+	}
+
+	file, err := os.Open("../../data/json.json")
+	if err != nil {
+		t.Fail()
+	}
+
+	defer gock.Off()
+	gock.New("https://security-tracker.debian.org").
+		Get("/tracker/data/json").Reply(200).Body(file)
+
+	vulnerabilties := ScanPackages(packages)
+	if vulnerabilties == nil {
+		t.Fail()
+	}
+
+	if len(vulnerabilties) == 0 {
+		t.Fail()
+	}
+
+	vul := vulnerabilties[0]
+	if vul.PackageName == "" {
+		t.Errorf("Expected package name, but found %s", vul.PackageName)
+	}
+
+	if !gock.IsDone() {
+		t.Fail()
+	}
+}
 
 func TestScanPackagesFromReader(t *testing.T) {
 	packages := dpkg.LoadInstalledPackages("../../data/dpkg/status")
