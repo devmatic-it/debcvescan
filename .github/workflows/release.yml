@@ -24,9 +24,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Create Debian repository
-        uses: devmatic-it/debrepo-action@v1
-        with:
-          who-to-greet: 'Mona the Octocat'
-        env: 
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
