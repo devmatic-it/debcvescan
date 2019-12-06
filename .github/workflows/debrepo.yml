@@ -24,6 +24,6 @@ jobs:
       - name: Create Debian repository test
         uses: devmatic-it/debrepo-action@v1
         with:
-          who-to-greet: 'Mona the Octocat'
+          who-to-greet: 'hello world'
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
