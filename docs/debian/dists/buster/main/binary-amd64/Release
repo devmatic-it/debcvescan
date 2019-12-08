@@ -1,0 +1,5 @@
+Component: main
+Origin: https://devmatic-it.github.io/debcvescan/debian
+Label: https://devmatic-it.github.io/debcvescan/debian
+Architecture: amd64
+Description: Personal repository
