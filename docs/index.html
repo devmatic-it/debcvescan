@@ -3,7 +3,51 @@
         DEBCVESCAN
     </head>
     <body>
-        DEB CVE SCAN DEBIAN REPOSITORY
-        INSTALL manual 2
+        <h1>DEB CVE SCAN DEBIAN REPOSITORY</h1>
+        <p>
+            Register an external repository            
+        </p>
+
+        <h2>Add the public GPG key to the apt sources keyring</h2>
+
+        <p>
+            wget -qO - https://devmatic-it.github.io/debcvescan/debian/PUBLIC.KEY | sudo apt-key add -
+        </p>
+        <p>
+            To list and remove a key from apt sources use the following commands respectively.
+        </p>
+        <p>
+            apt-key list
+        </p>
+        <p>
+            sudo apt-key del KEY.ID
+        </p>
+        
+                <h2>Register the external package repository</h2>
+        <p>
+            sudo vim /etc/apt/sources.list
+        </p>
+        <p>
+            Add the following line, replace variables with your values and save your changes.
+        </p>
+        
+        <p>
+            deb https://devmatic-it.github.io/debcvescan/debian buster main
+        </p>
+        
+    
+        <h2></h2>Install package</h2>
+        <p>
+            sudo apt-get update
+        </p>
+        
+        <p>
+            Finally, install the package from your external repository.
+        </p>
+        
+        <p>
+            sudo apt-get install debcvescan
+        </p>
+        
     </body>
 </html>
