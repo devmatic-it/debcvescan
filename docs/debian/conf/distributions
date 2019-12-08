@@ -1,0 +1,6 @@
+Origin: https://github.com/devmatic-it/debcvescan
+Label: https://github.com/devmatic-it/debcvescan
+Codename: buster
+Architectures: amd64
+Components: main
+Description: Personal repository
