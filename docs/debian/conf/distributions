@@ -4,4 +4,4 @@ Codename: buster
 Architectures: amd64
 Components: main
 Description: Personal repository
-SignWith: F0DDBCB91BBE600311B2B4F864B0FA1C48989B84
+SignWith: default
