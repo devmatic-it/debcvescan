@@ -31,11 +31,35 @@ We want to provide the same features as the debsescan without dependencies to py
 
 ### Debian Repository
 
-1. Download and import public GPG key: `wget -qO - https://devmatic-it.github.io/debcvescan/debian/PUBLIC.KEY | sudo apt-key add -`
-2. Select sources directory for APT: `cd /etc/apt/sources.list.d`
-3. Create new source file: `sudo echo "deb https://devmatic-it.github.io/debcvescan/debian buster main" > devmatic-it.list`
-4. Uodate APT repository: `sudo apt-get update`
-5. Install the package: `sudo apt-get install debcvescan`
+1. Download and import public GPG key:
+
+```bash
+wget -qO - https://devmatic-it.github.io/debcvescan/debian/PUBLIC.KEY | sudo apt-key add -
+```
+
+2. Select sources directory for APT:
+
+```bash
+cd /etc/apt/sources.list.d`
+```
+
+3. Create new source file:
+
+```bash
+sudo echo "deb https://devmatic-it.github.io/debcvescan/debian buster main" > devmatic-it.list
+```
+
+4. Uodate APT repository:
+
+```bash
+sudo apt-get update
+```
+
+5. Install the package:
+
+```bash
+sudo apt-get install debcvescan
+```
 
 ## Getting Started
 
