@@ -29,6 +29,14 @@ We want to provide the same features as the debsescan without dependencies to py
 2. extract archive: `dpkg -i debcvescan_X.Y.Z_linux_amd64.deb`
 3. scan system for vulnerabilities: `debcvescan scan`
 
+### Debian Repository
+
+1. Download and import public GPG key: `wget -qO - https://devmatic-it.github.io/debcvescan/debian/PUBLIC.KEY | sudo apt-key add -`
+2. Select sources directory for APT: `cd /etc/apt/sources.list.d`
+3. Create new source file: `sudo echo "deb https://devmatic-it.github.io/debcvescan/debian buster main" > devmatic-it.list`
+4. Uodate APT repository: `sudo apt-get update`
+5. Install the package: `sudo apt-get install debcvescan`
+
 ## Getting Started
 
 1. Execute scanning: `debcvescan scan`
