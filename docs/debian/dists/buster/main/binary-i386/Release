@@ -1,7 +1,5 @@
+Component: main
 Origin: devmatic-it.github.io/debcvescan/debian
 Label: devmatic-it.github.io/debcvescan/debian
-Codename: buster
-Architectures: i386 amd64
-Components: main
+Architecture: i386
 Description: Personal repository
-SignWith: default
