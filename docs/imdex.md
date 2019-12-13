@@ -25,31 +25,31 @@ We want to provide the same features as the debsescan without dependencies to py
 
 ### Debian Repository
 
-1. Download and import public GPG key:
+1.Download and import public GPG key:
 
 ```bash
 wget -qO - https://devmatic-it.github.io/debcvescan/debian/PUBLIC.KEY | sudo apt-key add -
 ```
 
-2. Select sources directory for APT:
+2.Select sources directory for APT:
 
 ```bash
 cd /etc/apt/sources.list.d`
 ```
 
-3. Create new source file:
+3.Create new source file:
 
 ```bash
 sudo echo "deb https://devmatic-it.github.io/debcvescan/debian buster main" > devmatic-it.list
 ```
 
-4. Uodate APT repository:
+4.Uodate APT repository:
 
 ```bash
 sudo apt-get update
 ```
 
-5. Install the package:
+5.Install the package:
 
 ```bash
 sudo apt-get install debcvescan
@@ -73,7 +73,7 @@ sudo apt-get install debcvescan
 
 This work has ben inspired by the following open source projects:
 
-- CoreOS Clair Project (<https://github.com/coreos/clair/>) 
+- CoreOS Clair Project (<https://github.com/coreos/clair/>)
 - Debsescan Security Scanner (<https://gitlab.com/fweimer/debsecan>)
 - GoRleaser Builder Image (<https://github.com/goreleaser/goreleaser>)
 - Building a basic CI/CD pipeline for a Golang application using GitHub Actions
