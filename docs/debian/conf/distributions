@@ -1,7 +1,0 @@
-Origin: devmatic-it.github.io/debcvescan/debian
-Label: devmatic-it.github.io/debcvescan/debian
-Codename: buster
-Architectures: amd64
-Components: main
-Description: Personal repository
-SignWith: default
