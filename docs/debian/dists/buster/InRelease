@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: devmatic-it.github.io/debcvescan/debian
+Label: devmatic-it.github.io/debcvescan/debian
+Codename: buster
+Date: Fri, 13 Dec 2019 08:46:24 UTC
+Architectures: i386 amd64
+Components: main
+Description: Personal repository
+MD5Sum:
+ 3fb42aafca59ab48a117fc3f89522bdc 605 main/binary-i386/Packages
+ 2be23519d2998b43ea44c3f15347088a 421 main/binary-i386/Packages.gz
+ e777b56f8d9bd68215ff07e6db0cc064 163 main/binary-i386/Release
+ cfad0132c508375a798d101ffe80615a 607 main/binary-amd64/Packages
+ 9343fb575ec5bab9f998931d3b0e064d 421 main/binary-amd64/Packages.gz
+ 3c70e2641c8b98a346272c7283cd8824 164 main/binary-amd64/Release
+SHA1:
+ 59192fa748eda79b72ef4534d861da29a57362ac 605 main/binary-i386/Packages
+ 57e9950e9c970097c2f01320a76ec299ce0995dd 421 main/binary-i386/Packages.gz
+ 2b35399aeea3e9e60d6fdad30dd6f8dac6fcac3b 163 main/binary-i386/Release
+ b151d47062e4921334df51d891686f27694a135f 607 main/binary-amd64/Packages
+ 7d046f0cc1041e74700511bb35526b792056e1ba 421 main/binary-amd64/Packages.gz
+ 226fae3dd3dfa8fafd639ec975fa4ca2a8def964 164 main/binary-amd64/Release
+SHA256:
+ 6d3a8c7197fba7a735b2ba7ba96b737124e7c784d6bceae8d202dc5dd8d18bbf 605 main/binary-i386/Packages
+ 84787cf2f105f7f64eb63b9bdd82da00a7e75562d2c2364fb878fec613c8e3fc 421 main/binary-i386/Packages.gz
+ 9b1d796d72507dd5619477140cc5eb7b05960400f8f0a4ab048887b519991452 163 main/binary-i386/Release
+ 895e5be935c59a0e09817923509832796ed480a3c05fdb751831f854c15814a1 607 main/binary-amd64/Packages
+ 81f5ee39953c623c11aa7f43b7697b6e9239c478fa647db3dae288388e0ba518 421 main/binary-amd64/Packages.gz
+ d73452578da977d76aa60c59efacf0d5c6f19e60bfd51dec34b5cb3d024a6e28 164 main/binary-amd64/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEERfODSO6I/Lru45xVnXwDugBAeJ8FAl3zT+AACgkQnXwDugBA
+eJ9zMgf5AV9lAh3DQf7MyFj6RERviWZ3/7oVnannFzAPZJq7ItY12VmUdDmrjKlD
+I2x6XSDL28JTgJTR2urFVxwm80PR9lISAhKeeXSdwUUXI1g2LRNcgYZRRUgWX/HX
+jRsq0Ug+K+w2hqtdTa9jkwWlsXr85fnKd9aeQZyyMkJPJ+r1UEnnnJwrGqVDzyIx
+ydflIowo2mpL/suko2xJcZOT2ahL02acGGXocTTc8mafBtxCjuZ8Pvf1T4W7qzvp
+YxwtKMVUxKoUocjh7DDLI+TkTh4YNf47y24Azy7/njISJSDrwP3H0yhiSGg9cKYY
+tiVTRMtBljVG3G4pmXk8LPHgRf9F6A==
+=aqwz
+-----END PGP SIGNATURE-----
