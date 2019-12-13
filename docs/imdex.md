@@ -1,3 +1,8 @@
+---
+layout: post
+title: DEBCVESCAN
+---
+
 # Debcvescan
 
 ## Motivation
