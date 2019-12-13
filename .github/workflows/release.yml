@@ -24,3 +24,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Create Debian repository
+      uses: devmatic-it/debrepo-action@v1
+      env: 
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
+        PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+        REPOSITORY: './docs/debian'
+        NAME: 'debcvescan'
+        ARCH: 'amd64'
+        OS: 'linux'
+        CODENAME: 'buster'
