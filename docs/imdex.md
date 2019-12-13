@@ -1,8 +1,3 @@
----
-layout: post
-title: DEBCVESCAN
----
-
 # Debcvescan
 
 ## Motivation
@@ -73,7 +68,6 @@ sudo apt-get install debcvescan
 
 4. export scan report to JSON: `debcvescan scan --format=json`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_scan_json.png)
-
 
 ## Credits
 
