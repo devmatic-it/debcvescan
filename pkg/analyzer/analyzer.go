@@ -16,10 +16,11 @@ package analyzer
 
 import (
 	"encoding/json"
-	"github.com/devmatic-it/debcvescan/pkg/dpkg"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/devmatic-it/debcvescan/pkg/dpkg"
 )
 
 // Severity describs the severity
@@ -58,6 +59,18 @@ type Vulnerability struct {
 	FixedVersion     string   `json:"fixed_version"`
 }
 
+// VulnerabilityReport vulnerabilty report
+type VulnerabilityReport struct {
+	CountTotal      int             `json:"count_total"`
+	CountHigh       int             `json:"count_high"`
+	CountMedium     int             `json:"count_medium"`
+	CountLow        int             `json:"count_low"`
+	CountUnknown    int             `json:"count_unknown"`
+	CountIgnore     int             `json:"count_ignore"`
+	CountOpen       int             `json:"count_open"`
+	Vulnerabilities []Vulnerability `json:"vulnerabilities"`
+}
+
 type jsonData map[string]map[string]jsonVulnerability
 
 type jsonVulnerability struct {
@@ -85,7 +98,7 @@ func severityFromUrgency(urgency string) Severity {
 		return HIGH
 
 	case "not yet assigned":
-		return UNKNOWN
+		return OPEN
 
 	case "end-of-life", "unimportant":
 		return IGNORE
@@ -96,7 +109,7 @@ func severityFromUrgency(urgency string) Severity {
 }
 
 // ScanPackages scans the given list of debian packages for vulnerabilties
-func ScanPackages(installedPackages dpkg.PackageList) []Vulnerability {
+func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://security-tracker.debian.org/tracker/data/json", nil)
 	if err != nil {
@@ -112,9 +125,8 @@ func ScanPackages(installedPackages dpkg.PackageList) []Vulnerability {
 }
 
 // scans for vulnerabilities in given packages
-func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList) []Vulnerability {
-
-	var vulnerabilities []Vulnerability
+func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList) VulnerabilityReport {
+	report := VulnerabilityReport{}
 
 	var data jsonData
 	err := json.NewDecoder(source).Decode(&data)
@@ -122,6 +134,7 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 		panic(err)
 	}
 
+	report.CountTotal = 0
 	cveNames := make(map[string]string)
 	for pkgName, pkgNode := range data {
 		pkgInstalledVersion, pkgExists := installedPackages[pkgName]
@@ -140,9 +153,33 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 							severity = OPEN
 						}
 
-						if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
-							vulnerabilities = append(vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+						// statistics
+						switch severity {
+						case OPEN:
+							report.CountOpen++
+							break
+						case HIGH:
+							report.CountHigh++
+							break
+						case MEDIUM:
+							report.CountMedium++
+							break
+						case LOW:
+							report.CountLow++
+							break
+						case IGNORE:
+							report.CountIgnore++
+							break
+						case UNKNOWN:
+							report.CountUnknown++
+							break
 						}
+
+						if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
+							report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+						}
+
+						report.CountTotal++
 					}
 
 				}
@@ -151,5 +188,5 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 
 	}
 
-	return vulnerabilities
+	return report
 }

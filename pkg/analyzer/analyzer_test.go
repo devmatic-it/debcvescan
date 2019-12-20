@@ -37,16 +37,17 @@ func TestScanPackages(t *testing.T) {
 	gock.New("https://security-tracker.debian.org").
 		Get("/tracker/data/json").Reply(200).Body(file)
 
-	vulnerabilties := ScanPackages(packages)
-	if vulnerabilties == nil {
+	report := ScanPackages(packages)
+
+	if report.Vulnerabilities == nil {
 		t.Fail()
 	}
 
-	if len(vulnerabilties) == 0 {
+	if len(report.Vulnerabilities) == 0 {
 		t.Fail()
 	}
 
-	vul := vulnerabilties[0]
+	vul := report.Vulnerabilities[0]
 	if vul.PackageName == "" {
 		t.Errorf("Expected package name, but found %s", vul.PackageName)
 	}
@@ -67,16 +68,16 @@ func TestScanPackagesFromReader(t *testing.T) {
 		t.Fail()
 	}
 
-	vulnerabilties := scanPackagesFromReader(file, packages)
-	if vulnerabilties == nil {
+	report := scanPackagesFromReader(file, packages)
+	if report.Vulnerabilities == nil {
 		t.Fail()
 	}
 
-	if len(vulnerabilties) == 0 {
+	if len(report.Vulnerabilities) == 0 {
 		t.Fail()
 	}
 
-	vul := vulnerabilties[0]
+	vul := report.Vulnerabilities[0]
 	if vul.PackageName == "" {
 		t.Errorf("Expected package name, but found %s", vul.PackageName)
 	}

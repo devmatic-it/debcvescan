@@ -15,13 +15,14 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/devmatic-it/debcvescan/pkg/analyzer"
-	"github.com/devmatic-it/debcvescan/pkg/dpkg"
 	"os"
 	"strings"
+
+	"github.com/devmatic-it/debcvescan/pkg/analyzer"
+	"github.com/devmatic-it/debcvescan/pkg/dpkg"
+	"github.com/devmatic-it/debcvescan/pkg/reporter"
 )
 
 // number of columns to be displayed per line
@@ -29,6 +30,9 @@ var displayColumns int
 
 // display format, can be text or json
 var displayFormat string
+
+// syslogd host:port, default: localhost:514
+var syslogHost string
 
 // scan command
 var scanCommand *flag.FlagSet
@@ -38,6 +42,7 @@ func init() {
 	scanCommand = flag.NewFlagSet("scan", flag.ExitOnError)
 	scanCommand.IntVar(&displayColumns, "line-length", 128, "number of columns displayed on screen")
 	scanCommand.StringVar(&displayFormat, "format", "text", "display format")
+	scanCommand.StringVar(&syslogHost, "syslog-host", "localhost:514", "syslogd host:port to stream TCP syslog events")
 }
 
 // displays a help messag
@@ -65,7 +70,7 @@ func displayVulnerability(vul analyzer.Vulnerability) {
 }
 
 // analyzes installed packages
-func analyze() []analyzer.Vulnerability {
+func analyze() analyzer.VulnerabilityReport {
 	// load installed packages
 	installedPackages := dpkg.LoadInstalledPackages("/var/lib/dpkg/status")
 	// scan for vulnerabilties
@@ -77,26 +82,16 @@ func analyze() []analyzer.Vulnerability {
 func executeScan() {
 	scanCommand.Parse(os.Args[2:])
 
-	vulnerabilties := analyze()
-
-	if displayFormat == "text" {
-		// report vulnerabilities
-		for _, vul := range vulnerabilties {
-
-			maxLen := len(vul.Description)
-			if displayColumns < maxLen {
-				maxLen = displayColumns
-			}
-
-			fmt.Printf("%-12s %-6s %s: %s \n", vul.PackageName, vul.Severity, vul.CVE, vul.Description[:maxLen])
-		}
-	} else if displayFormat == "json" {
-		data, err := json.MarshalIndent(vulnerabilties, "", "  ")
-		if err != nil {
-			panic(err)
-		}
-
-		fmt.Println(string(data))
+	report := analyze()
+	switch displayFormat {
+	case "text":
+		reporter.GenerateTextReport(report, displayColumns)
+		break
+	case "json":
+		reporter.GenerateJSONReport(report)
+		break
+	case "syslog":
+		reporter.GenerateSyslogReport(report, syslogHost)
 	}
 }
 
@@ -113,10 +108,10 @@ func excecuteCVE() {
 		displayHelp()
 	}
 
-	vulnerabilties := analyze()
+	report := analyze()
 
 	// report vulnerabilities
-	for _, vul := range vulnerabilties {
+	for _, vul := range report.Vulnerabilities {
 		if vul.CVE == cve {
 			displayVulnerability(vul)
 			break
@@ -135,10 +130,10 @@ func excecutePackage() {
 	pkgCommand := flag.NewFlagSet("pkg", flag.ContinueOnError)
 	pkgCommand.Parse(os.Args[3:])
 
-	vulnerabilties := analyze()
+	report := analyze()
 
 	// report vulnerabilities
-	for _, vul := range vulnerabilties {
+	for _, vul := range report.Vulnerabilities {
 		if vul.PackageName == pkg {
 			displayVulnerability(vul)
 			fmt.Println()
