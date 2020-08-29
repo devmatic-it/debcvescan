@@ -46,3 +46,7 @@ nfpms:
       - deb
       
     bindir: /usr/bin
+
+release:
+ extra_files:
+    - glob: ./gosec_report.html
