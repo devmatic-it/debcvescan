@@ -20,7 +20,7 @@ get:
 
 security:
 	@echo "Gosec security scan..."
-	gosec -fmt html -out gosec_report.html  ./...	
+	dist/gosec -fmt html -out gosec_report.html  ./...	
 
 build:
 	@echo "Building binary..."
