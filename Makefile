@@ -15,7 +15,7 @@ compile: get build test-coverage security
 
 get:
 	@echo "Downloading dependencies..."	
-	GOBIN=$(GOBIN) go get go get github.com/securego/gosec/v2/cmd/gosec
+	GOBIN=$(GOBIN) go get github.com/securego/gosec/v2/cmd/gosec
 	GOBIN=$(GOBIN) go get
 
 security:
@@ -34,4 +34,6 @@ clean:
 	@echo "Cleanup dependencies..."	
 	rm -Rf ./src/github.com 
 	rm -Rf ./src/golang.org
-	rm -Rf ./src/gopkg.in	
+	rm -Rf ./src/gopkg.in
+	rm -Rf ./dist/*
+	rm cover.out coverage.txt gosec_report.html
