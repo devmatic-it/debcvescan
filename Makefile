@@ -15,6 +15,7 @@ compile: get build test-coverage security
 
 get:
 	@echo "Downloading dependencies..."	
+	go get github.com/securego/gosec/v2/cmd/gosec
 	GOBIN=$(GOBIN) go get
 
 security:
