@@ -4,27 +4,26 @@
 # Author F. Bator
 ###############################################################################
 
-TARGET= ./cmd/debcvescan
 GOBASE=$(shell pwd)
-GOPATH=$(GOBASE)
 GOBIN=$(GOBASE)/dist
-GOFILES=$(wildcard *.go)
 PKG := "github.com/devmatic-it/debcvescan"
 PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
-GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 
 all:  compile
 
-compile: get install test-coverage
+compile: get build test-coverage security
 
 get:
 	@echo "Downloading dependencies..."	
-	GOBIN=$(GOBIN) go get $(TARGET)
+	GOBIN=$(GOBIN) go get
 
+security:
+	@echo "Gosec security scan..."
+	gosec -fmt html -out gosec_report.html  ./...	
 
-install:
+build:
 	@echo "Building binary..."
-	GOBIN=$(GOBIN) go install $(TARGET)
+	GOBIN=$(GOBIN) go build -o dist/debcvescan
 	
 test-coverage:
 	@go test -short -coverprofile cover.out -covermode=atomic ${PKG_LIST} 

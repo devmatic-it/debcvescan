@@ -17,8 +17,9 @@ package dpkg
 import (
 	"bufio"
 	"os"
-	"pault.ag/go/debian/version"
 	"strings"
+
+	"pault.ag/go/debian/version"
 )
 
 // PackageList contains a list of installed packages
@@ -27,6 +28,7 @@ type PackageList map[string]string
 // LoadInstalledPackages Loads installed packages from /var/lib/dppkg/status file
 func LoadInstalledPackages(path string) PackageList {
 	packages := make(PackageList)
+	/* #nosec G304 */
 	reader, err := os.Open(path)
 	if err != nil {
 		panic(err)

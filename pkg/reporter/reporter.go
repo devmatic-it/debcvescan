@@ -57,15 +57,34 @@ func GenerateSyslogReport(report analyzer.VulnerabilityReport, host string) {
 	for _, vul := range report.Vulnerabilities {
 		message := fmt.Sprintf("%-12s %-6s %s: %s \n", vul.PackageName, vul.Severity, vul.CVE, vul.Description)
 		if vul.Severity == analyzer.LOW {
-			sysLog.Info(message)
+			err = sysLog.Info(message)
+			if err != nil {
+				log.Fatal(err)
+			}
+
 		} else if vul.Severity == analyzer.MEDIUM {
-			sysLog.Warning(message)
+			err = sysLog.Warning(message)
+			if err != nil {
+				log.Fatal(err)
+			}
+
 		} else if vul.Severity == analyzer.HIGH {
-			sysLog.Err(message)
+			err = sysLog.Err(message)
+			if err != nil {
+				log.Fatal(err)
+			}
+
 		} else if vul.Severity == analyzer.IGNORE {
-			sysLog.Notice(message)
+			err = sysLog.Notice(message)
+			if err != nil {
+				log.Fatal(err)
+			}
+
 		} else if vul.Severity == analyzer.UNKNOWN {
-			sysLog.Warning(message)
+			err = sysLog.Warning(message)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 }
