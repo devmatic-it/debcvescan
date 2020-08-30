@@ -1,7 +1,6 @@
----
-title: DEBCVESCAN
-permalink: /index.html
----
+
+# Debcvescan
+
 ## Motivation
 
 The target of this project is to provider the CVE security scanning solution that is lightweight and self-contained. The current standard solution debsescan requires the following packages to be installed in order to run:
