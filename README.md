@@ -66,10 +66,10 @@ sudo apt-get install debcvescan
 1. Execute scanning: `debcvescan scan`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_scan.png)
 
-2. Scan a specific package for vulnerabilities: `debcvescan pkg vim`
+2. Scan a specific package for vulnerabilities: `debcvescan pkg cron`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_pkg.png)
 
-3. Get details for a specific vulnerabitities: `debcvescan cve CVE-12345`
+3. Get details for a specific vulnerabitities: `debcvescan cve CVE-2019-9704`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_cve.png)
 
 4. export scan report to JSON: `debcvescan scan --format=json`
@@ -95,7 +95,7 @@ sudo apt-get install debcvescan
 
 This work has ben inspired by the following open source projects:
 
-- CoreOS Clair Project (<https://github.com/coreos/clair/>) 
+- CoreOS Clair Project (<https://github.com/coreos/clair/>)
 - Debsescan Security Scanner (<https://gitlab.com/fweimer/debsecan>)
 - GoRleaser Builder Image (<https://github.com/goreleaser/goreleaser>)
 - Building a basic CI/CD pipeline for a Golang application using GitHub Actions
