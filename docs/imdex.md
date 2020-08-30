@@ -1,6 +1,6 @@
 ---
 title: DEBCVESCAN
-permalink: index.html
+permalink: /index.html
 ---
 ## Motivation
 
