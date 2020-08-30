@@ -16,6 +16,7 @@ var pkgCmd = &cobra.Command{
 	Use:   "pkg <package>",
 	Short: "package vulnerabilities",
 	Long:  `Give details of vulnerabilties of a package.`,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		report := analyze()

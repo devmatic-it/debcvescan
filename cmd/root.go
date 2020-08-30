@@ -10,15 +10,11 @@ import (
 	"fmt"
 )
 
-// ProductVersion contains the product version injected by the build system
-var ProductVersion string
-
 // config variables
 var (
 	rootCmd = &cobra.Command{
-		Use:     "debcvescan",
-		Version: ProductVersion,
-		Short:   "Debian CVE Scanner",
+		Use:   "debcvescan",
+		Short: "Debian CVE Scanner",
 		Long: `Debian CVE Scanner
 
 
@@ -30,10 +26,6 @@ I has no dependencies to other libraries and is self-contained compared to the o
 	}
 )
 
-// initializes config variables
-func init() {
-}
-
 // Execute runs the root cobra command for the gelp
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
@@ -44,6 +36,7 @@ func Execute() {
 
 // analyzes installed packages
 func analyze() analyzer.VulnerabilityReport {
+
 	// load installed packages
 	installedPackages := dpkg.LoadInstalledPackages("/var/lib/dpkg/status")
 	// scan for vulnerabilties

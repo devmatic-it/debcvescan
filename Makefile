@@ -36,4 +36,4 @@ clean:
 	rm -Rf ./src/golang.org
 	rm -Rf ./src/gopkg.in
 	rm -Rf ./dist/*
-	rm cover.out coverage.txt gosec_report.html
+	rm -f cover.out coverage.txt gosec_report.html

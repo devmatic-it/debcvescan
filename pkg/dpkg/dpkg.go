@@ -16,6 +16,7 @@ package dpkg
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 
@@ -31,7 +32,8 @@ func LoadInstalledPackages(path string) PackageList {
 	/* #nosec G304 */
 	reader, err := os.Open(path)
 	if err != nil {
-		panic(err)
+		fmt.Printf("File %s does not exists. \nOnly DEBIAN based distributions are supported.\n", path)
+		os.Exit(1)
 	}
 
 	scanner := bufio.NewScanner(reader)
