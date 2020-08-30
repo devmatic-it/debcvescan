@@ -1,28 +1,28 @@
 Origin: devmatic-it.github.io/debcvescan/debian
 Label: devmatic-it.github.io/debcvescan/debian
 Codename: buster
-Date: Sat, 29 Aug 2020 16:59:51 UTC
+Date: Sun, 30 Aug 2020 08:26:00 UTC
 Architectures: i386 amd64
 Components: main
 Description: Personal repository
 MD5Sum:
- 87bf6a764e6eb6d55140acf63245dcaf 605 main/binary-i386/Packages
- cc81edf12ad98a3af6c874a5f7b2a1ea 421 main/binary-i386/Packages.gz
+ 36b92680b051ffc55ac01aa64d2f98b7 605 main/binary-i386/Packages
+ f0b1f113221dcda0c80e1779bf0f2a18 419 main/binary-i386/Packages.gz
  e777b56f8d9bd68215ff07e6db0cc064 163 main/binary-i386/Release
- 25cb5e39ba3be1a00a432b1d3401254d 607 main/binary-amd64/Packages
- d366c7896b36099e014697282d3c24c8 422 main/binary-amd64/Packages.gz
+ 355b8c819e4abcedc8f036afb2379e8a 607 main/binary-amd64/Packages
+ ddde7e8b08de8160818f42dbbc925a0f 421 main/binary-amd64/Packages.gz
  3c70e2641c8b98a346272c7283cd8824 164 main/binary-amd64/Release
 SHA1:
- 63e3f6dd499ef7c33670be0e0f4bab486ac86b16 605 main/binary-i386/Packages
- dec27e22a95da7663aca7d4abc1b55e15fbaae5a 421 main/binary-i386/Packages.gz
+ 42d93ecd3158aaaebf052803fc133649945a38a8 605 main/binary-i386/Packages
+ 62c01f78c244b0dc2ade61bc5fad5cdc856cda69 419 main/binary-i386/Packages.gz
  2b35399aeea3e9e60d6fdad30dd6f8dac6fcac3b 163 main/binary-i386/Release
- 84bb00d1ad79c2c7a9e416a1d2a92e00d2607369 607 main/binary-amd64/Packages
- 6bf0ccc66f83c48f2c991a97199897ecff2a6133 422 main/binary-amd64/Packages.gz
+ 140b6d9f2e132f125eb5fac8f4287f3d00fc22d5 607 main/binary-amd64/Packages
+ 454852dd72ebabad2f6ce1717b495d5a0e0111db 421 main/binary-amd64/Packages.gz
  226fae3dd3dfa8fafd639ec975fa4ca2a8def964 164 main/binary-amd64/Release
 SHA256:
- 9011944106e06ab82ea831456544c84e454ddc5caff22f5247bcff3d55dfc1ae 605 main/binary-i386/Packages
- 639ba9036a62a7671cec6d1e8034b4362f400297ba079a79537f74cd1d8086df 421 main/binary-i386/Packages.gz
+ cb32023f3cd6344eaa261f35e872a0c87c1dfbb5211bc90d9a55b25e3d8caf0c 605 main/binary-i386/Packages
+ e4504be9826b62efeb4df1379cc28a72b231b9bec2491ff1fa79cb7634bbbccc 419 main/binary-i386/Packages.gz
  9b1d796d72507dd5619477140cc5eb7b05960400f8f0a4ab048887b519991452 163 main/binary-i386/Release
- 630a4c8aa0e13a2155bcba2457ae66342cd5b3eec39bfa0f67ca649540138d53 607 main/binary-amd64/Packages
- 1cbf13bce017b8b48dc57e84d2bef21fbb68446bbf1e2629e43c8e6891763d60 422 main/binary-amd64/Packages.gz
+ 1504bfd6fbad018ac3cc87833339d807139493ec507e6bb01dbde760455925c5 607 main/binary-amd64/Packages
+ 1e41c94a3f184bdff20ba22763fa276d62c8566ad86ea31cf9ee79829e379a5c 421 main/binary-amd64/Packages.gz
  d73452578da977d76aa60c59efacf0d5c6f19e60bfd51dec34b5cb3d024a6e28 164 main/binary-amd64/Release
