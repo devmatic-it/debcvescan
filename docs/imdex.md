@@ -60,16 +60,16 @@ sudo apt-get install debcvescan
 ## Getting Started
 
 1. Execute scanning: `debcvescan scan`
-![debcvescan scan](/docs/img/debcvescan_scan.png)
+![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_scan.png)
 
 2. Scan a specific package for vulnerabilities: `debcvescan pkg vim`
-![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_scan.png)
+![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_pkg.png)
 
 3. Get details for a specific vulnerabitities: `debcvescan cve CVE-12345`
-![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_scan.png)
+![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_cve.png)
 
 4. export scan report to JSON: `debcvescan scan --format=json`
-![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_scan.png)
+![debcvescan scan](https://raw.githubusercontent.com/devmatic-it/debcvescan/master/docs/img/debcvescan_scan_json.png)
 
 ## Credits
 
