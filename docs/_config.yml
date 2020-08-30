@@ -2,7 +2,13 @@ theme: jekyll-theme-slate
 title: debcvescan
 description: The self-contained debian security scanner
 defaults:
-  - scope:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  - 
+    scope:
       path: "docs/img"
     values:
       image: true
