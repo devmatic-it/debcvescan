@@ -21,11 +21,6 @@ var downloadCmd = &cobra.Command{
 	Long:  `Download cve json file.`,
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		// file, err := os.Create("./debcvelist.json")
-		// if err != nil {
-		// 	panic(err)
-		// }
-
 		client := &http.Client{}
 		req, err := http.NewRequest("GET", "https://security-tracker.debian.org/tracker/data/json", nil)
 		if err != nil {
