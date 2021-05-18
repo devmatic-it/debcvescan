@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/devmatic-it/debcvescan/pkg/dpkg"
@@ -110,18 +111,26 @@ func severityFromUrgency(urgency string) Severity {
 
 // ScanPackages scans the given list of debian packages for vulnerabilties
 func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
-	client := &http.Client{}
-	req, err := http.NewRequest("GET", "https://security-tracker.debian.org/tracker/data/json", nil)
+
+	cvejson, err := os.Open("./debcvelist.json")
 	if err != nil {
-		panic(err)
+
+		client := &http.Client{}
+		req, err := http.NewRequest("GET", "https://security-tracker.debian.org/tracker/data/json", nil)
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := client.Do(req)
+		if err != nil {
+			panic(err)
+		}
+
+		return scanPackagesFromReader(resp.Body, installedPackages)
+
 	}
 
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-
-	return scanPackagesFromReader(resp.Body, installedPackages)
+	return scanPackagesFromReader(cvejson, installedPackages)
 }
 
 // scans for vulnerabilities in given packages
