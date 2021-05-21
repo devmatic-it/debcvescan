@@ -4,5 +4,5 @@ gosec_report.*
 dist
 build/debcvescan
 debcvescan.code-workspace
-debcvescan
+#debcvescan
 debcvelist.json
