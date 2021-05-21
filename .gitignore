@@ -3,3 +3,6 @@ cover.out
 gosec_report.*
 dist
 build/debcvescan
+debcvescan.code-workspace
+debcvescan
+debcvelist.json
