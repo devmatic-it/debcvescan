@@ -39,7 +39,7 @@ var downloadCmd = &cobra.Command{
 			panic(err)
 		}
 
-		err = os.WriteFile("./debcvelist.json", json, 0664)
+		err = os.WriteFile("./debcvelist.json", json, 0600)
 		if err != nil {
 			panic(err)
 		}
