@@ -59,7 +59,7 @@ type Vulnerability struct {
 	FixedVersion     string   `json:"fixed_version"`
 }
 
-// VulnerabilityReport vulnerabilty report
+// VulnerabilityReport vulnerability report
 type VulnerabilityReport struct {
 	CountTotal      int             `json:"count_total"`
 	CountHigh       int             `json:"count_high"`

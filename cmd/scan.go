@@ -14,7 +14,7 @@ var displayFormat string
 // syslogd host:port, default: localhost:514
 var syslogHost string
 
-// initializes arguments for scan commmand
+// initializes arguments for scan command
 func init() {
 	rootCmd.AddCommand(scanCmd)
 

@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// initializes arguments for pkg commmand
+// initializes arguments for pkg command
 func init() {
 	rootCmd.AddCommand(pkgCmd)
 }

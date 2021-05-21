@@ -19,7 +19,7 @@ var (
 
 
 CVE Security Scanner for Debian Linux distributions using official Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>.
-I has no dependencies to other libraries and is self-contained compared to the offical PERL implementation.
+I has no dependencies to other libraries and is self-contained compared to the official PERL implementation.
 		`,
 		Run: func(cmd *cobra.Command, args []string) {
 		},
