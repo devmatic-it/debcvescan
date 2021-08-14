@@ -7,13 +7,13 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-- ldflags: -s -w -X "cmd.ProductVersion={{.Version}}"
+- ldflags: -s -w -X github.com/devmatic-it/debcvescan/cmd.ProductVersion={{.Version}}
   env:
   - CGO_ENABLED=0
   main: ./main.go
   goos:
     - linux
-  
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
