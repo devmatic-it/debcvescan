@@ -6,3 +6,4 @@ build/debcvescan
 debcvescan.code-workspace
 #debcvescan
 debcvelist.json
+pkg/analyzer/debcvescan.whitelist

@@ -143,6 +143,7 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 		panic(err)
 	}
 
+	whitelist := NewWhitelist()
 	report.CountTotal = 0
 	cveNames := make(map[string]string)
 	for pkgName, pkgNode := range data {
@@ -184,8 +185,10 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 							break
 						}
 
-						if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
-							report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+						if !whitelist.IsWhitelisted(vulnName) {
+							if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
+								report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+							}
 						}
 
 						report.CountTotal++
