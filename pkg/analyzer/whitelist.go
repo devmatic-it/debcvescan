@@ -22,6 +22,7 @@ import (
 // WhitelistEntry represents an entry in the whitelist
 type WhitelistEntry struct {
 	CVE           string `json:"cve"`
+	Package       string `json:"package"`
 	Justification string `json:"justification"`
 }
 
@@ -46,14 +47,14 @@ func NewWhitelist() WhiteList {
 }
 
 // Add adds a new CVE whitelist entry together with justification to 'debcvescan.whitelist' file and saves it
-func (s *WhiteList) Add(cve string, justification string) {
+func (s *WhiteList) AddCVE(cve string, justification string) {
 	s.Whitelisted = append(s.Whitelisted, WhitelistEntry{CVE: cve, Justification: justification})
 	s.save()
 }
 
 // Remove emoves the given CVE entry from the 'debcvescan.whitelist' file and saves ii
-func (s *WhiteList) Remove(cve string) {
-	idx := s.findIndex(cve)
+func (s *WhiteList) RemoveCVE(cve string) {
+	idx := s.findIndexCVE(cve)
 	if idx >= 0 {
 		s.removeIndex(idx)
 		s.save()
@@ -62,12 +63,12 @@ func (s *WhiteList) Remove(cve string) {
 }
 
 // IsWhitelisted checks if th given CVE is whitelisted or not
-func (s *WhiteList) IsWhitelisted(cve string) bool {
-	return s.findIndex(cve) >= 0
+func (s *WhiteList) HasCVE(cve string) bool {
+	return s.findIndexCVE(cve) >= 0
 }
 
 // findIndex helper function to find the array index for the given CVE
-func (s *WhiteList) findIndex(cve string) int {
+func (s *WhiteList) findIndexCVE(cve string) int {
 	for i := 0; i < len(s.Whitelisted); i++ {
 		if s.Whitelisted[i].CVE == cve {
 			return i

@@ -185,7 +185,7 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 							break
 						}
 
-						if !whitelist.IsWhitelisted(vulnName) {
+						if !whitelist.HasCVE(vulnName) {
 							if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
 								report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
 							}

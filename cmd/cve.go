@@ -31,14 +31,14 @@ var cveCmd = &cobra.Command{
 				return
 			}
 
-			whitelisted.Add(args[0], cveAddWhitelist)
+			whitelisted.AddCVE(args[0], cveAddWhitelist)
 		} else if cveRemoveWhitelist {
 			if len(args) == 0 {
 				fmt.Println("error, <cve> required")
 				return
 			}
 
-			whitelisted.Remove(args[0])
+			whitelisted.RemoveCVE(args[0])
 		} else if cveShowWhitelist {
 			for _, entry := range whitelisted.Whitelisted {
 				fmt.Printf("%s: %s\n", entry.CVE, entry.Justification)
