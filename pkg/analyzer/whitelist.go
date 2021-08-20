@@ -48,29 +48,69 @@ func NewWhitelist() WhiteList {
 
 // Add adds a new CVE whitelist entry together with justification to 'debcvescan.whitelist' file and saves it
 func (s *WhiteList) AddCVE(cve string, justification string) {
-	s.Whitelisted = append(s.Whitelisted, WhitelistEntry{CVE: cve, Justification: justification})
+	idx := s.findIndexCVE(cve)
+	if idx == -1 {
+		s.Whitelisted = append(s.Whitelisted, WhitelistEntry{CVE: cve, Justification: justification})
+	} else {
+		s.Whitelisted[idx].Justification = justification
+	}
 	s.save()
 }
 
-// Remove emoves the given CVE entry from the 'debcvescan.whitelist' file and saves ii
+// Add adds a new package whitelist entry together with justification to 'debcvescan.whitelist' file and saves it
+func (s *WhiteList) AddPackage(name string, justification string) {
+	idx := s.findIndexPackage(name)
+	if idx == -1 {
+		s.Whitelisted = append(s.Whitelisted, WhitelistEntry{Package: name, Justification: justification})
+	} else {
+		s.Whitelisted[idx].Justification = justification
+	}
+	s.save()
+}
+
+// RemoveCVE emoves the given CVE entry from the 'debcvescan.whitelist' file and saves ii
 func (s *WhiteList) RemoveCVE(cve string) {
 	idx := s.findIndexCVE(cve)
 	if idx >= 0 {
 		s.removeIndex(idx)
 		s.save()
 	}
-
 }
 
-// IsWhitelisted checks if th given CVE is whitelisted or not
+// RemovePackage emoves the given package entry from the 'debcvescan.whitelist' file and saves ii
+func (s *WhiteList) RemovePackage(name string) {
+	idx := s.findIndexPackage(name)
+	if idx >= 0 {
+		s.removeIndex(idx)
+		s.save()
+	}
+}
+
+// HasCVE checks if th given CVE is whitelisted or not
 func (s *WhiteList) HasCVE(cve string) bool {
 	return s.findIndexCVE(cve) >= 0
+}
+
+// HasPackage checks if th given package is whitelisted or not
+func (s *WhiteList) HasPackage(name string) bool {
+	return s.findIndexPackage(name) >= 0
 }
 
 // findIndex helper function to find the array index for the given CVE
 func (s *WhiteList) findIndexCVE(cve string) int {
 	for i := 0; i < len(s.Whitelisted); i++ {
 		if s.Whitelisted[i].CVE == cve {
+			return i
+		}
+	}
+
+	return -1
+}
+
+// findIndex helper function to find the array index for the given package
+func (s *WhiteList) findIndexPackage(name string) int {
+	for i := 0; i < len(s.Whitelisted); i++ {
+		if s.Whitelisted[i].Package == name {
 			return i
 		}
 	}

@@ -147,57 +147,58 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 	report.CountTotal = 0
 	cveNames := make(map[string]string)
 	for pkgName, pkgNode := range data {
-		pkgInstalledVersion, pkgExists := installedPackages[pkgName]
-		if pkgExists {
-			for vulnName, vulnNode := range pkgNode {
-				for _, releaseNode := range vulnNode.Releases {
-					if !strings.HasPrefix(vulnName, "CVE-") || releaseNode.Status == "undetermined" {
-						continue
-					}
-
-					_, exists := cveNames[vulnName]
-					if !exists && dpkg.IsAffectedVersion(pkgInstalledVersion, releaseNode.FixedVersion) {
-						cveNames[vulnName] = pkgName
-						severity := severityFromUrgency(releaseNode.Urgency)
-						if releaseNode.Status == "Open" {
-							severity = OPEN
+		if !whitelist.HasPackage(pkgName) {
+			pkgInstalledVersion, pkgExists := installedPackages[pkgName]
+			if pkgExists {
+				for vulnName, vulnNode := range pkgNode {
+					for _, releaseNode := range vulnNode.Releases {
+						if !strings.HasPrefix(vulnName, "CVE-") || releaseNode.Status == "undetermined" {
+							continue
 						}
 
-						// statistics
-						switch severity {
-						case OPEN:
-							report.CountOpen++
-							break
-						case HIGH:
-							report.CountHigh++
-							break
-						case MEDIUM:
-							report.CountMedium++
-							break
-						case LOW:
-							report.CountLow++
-							break
-						case IGNORE:
-							report.CountIgnore++
-							break
-						case UNKNOWN:
-							report.CountUnknown++
-							break
-						}
-
-						if !whitelist.HasCVE(vulnName) {
-							if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
-								report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+						_, exists := cveNames[vulnName]
+						if !exists && dpkg.IsAffectedVersion(pkgInstalledVersion, releaseNode.FixedVersion) {
+							cveNames[vulnName] = pkgName
+							severity := severityFromUrgency(releaseNode.Urgency)
+							if releaseNode.Status == "Open" {
+								severity = OPEN
 							}
+
+							// statistics
+							switch severity {
+							case OPEN:
+								report.CountOpen++
+								break
+							case HIGH:
+								report.CountHigh++
+								break
+							case MEDIUM:
+								report.CountMedium++
+								break
+							case LOW:
+								report.CountLow++
+								break
+							case IGNORE:
+								report.CountIgnore++
+								break
+							case UNKNOWN:
+								report.CountUnknown++
+								break
+							}
+
+							if !whitelist.HasCVE(vulnName) {
+								if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
+									report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
+								}
+							}
+
+							report.CountTotal++
 						}
 
-						report.CountTotal++
 					}
-
 				}
 			}
 		}
-
 	}
 
 	return report
