@@ -168,22 +168,16 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 							switch severity {
 							case OPEN:
 								report.CountOpen++
-								break
 							case HIGH:
 								report.CountHigh++
-								break
 							case MEDIUM:
 								report.CountMedium++
-								break
 							case LOW:
 								report.CountLow++
-								break
 							case IGNORE:
 								report.CountIgnore++
-								break
 							case UNKNOWN:
 								report.CountUnknown++
-								break
 							}
 
 							if !whitelist.HasCVE(vulnName) {
