@@ -30,16 +30,16 @@ func GetOSInfo() (string, string, string) {
 	if err == nil {
 		file, _ = os.Open("/usr/lib/os-release")
 	}
-	
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		text := scanner.Text()
 		if strings.HasPrefix(text, "ID=") {
 			id = strings.TrimPrefix(text, "ID=")
-		} else if strings.HasPrefix(text, "VERSION=") {
-			version = strings.TrimPrefix(text, "VERSION=")
-		} else if strings.HasPrefix(text, "CODENAME=") {
-			codename = strings.TrimPrefix(text, "CODENAME=")
+		} else if strings.HasPrefix(text, "VERSION_ID=") {
+			version = strings.TrimPrefix(text, "VERSION_ID=")
+		} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
+			codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
 		}
 	}
 
