@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
+	"github.com/devmatic-it/debcvescan/pkg/analyzer"
 	"github.com/spf13/cobra"
 )
 
@@ -23,5 +24,7 @@ var versionCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("debcvescan: %s\n", ProductVersion)
 		fmt.Printf("go version: %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+		id, version, codename := analyzer.GetOSInfo()
+		fmt.Printf("OS: %s %s %s\n", id, version, codename)
 	},
 }
