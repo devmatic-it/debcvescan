@@ -27,14 +27,14 @@ var cveCmd = &cobra.Command{
 		whitelisted := analyzer.NewWhitelist()
 		if cveAddWhitelist != "" {
 			if len(args) == 0 {
-				fmt.Println("error, <cve> required")
+				fmt.Println("error, <cve> required for creating new whitelisted CVE")
 				return
 			}
 
 			whitelisted.AddCVE(args[0], cveAddWhitelist)
 		} else if cveRemoveWhitelist {
 			if len(args) == 0 {
-				fmt.Println("error, <cve> required")
+				fmt.Println("error, <cve> required for removing whitelisted CVE")
 				return
 			}
 
@@ -45,7 +45,7 @@ var cveCmd = &cobra.Command{
 			}
 		} else {
 			if len(args) == 0 {
-				fmt.Println("error, <cve> required")
+				fmt.Println("error, <cve> required for showing details about the CVE")
 				return
 			}
 			report := analyze()
