@@ -19,10 +19,10 @@ jobs:
     - name: Build
       run: make
 
-    - name: Update resources
+    - name: Update coverage.txt
       uses: test-room-7/action-update-file@v1
       with:
-          file-path: ./coverage.txt
+          file-path: coverage.txt
           commit-msg: Update coverage file for sonarcloud.io
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
