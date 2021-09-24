@@ -42,8 +42,11 @@ func NewWhitelist() WhiteList {
 		}
 
 	}
+	err = file.Close()
+	if err != nil {
+		println("Warning: 'debcvescan.whitelist' cannot close file")
+	}
 
-	file.Close()
 	return result
 }
 
