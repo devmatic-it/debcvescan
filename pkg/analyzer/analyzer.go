@@ -17,7 +17,6 @@ package analyzer
 import (
 	"compress/bzip2"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -50,28 +49,6 @@ const (
 
 func (serverity Severity) String() string {
 	return [...]string{"OPEN", "HIGH", "MEDIUM", "LOW", "UNKNOWN", "IGNORE"}[serverity]
-}
-
-// Vulnerability contains a vulnerability
-type Vulnerability struct {
-	Severity         Severity `json:"severity"`
-	CVE              string   `json:"cve"`
-	Description      string   `json:"description"`
-	PackageName      string   `json:"package"`
-	InstalledVersion string   `json:"installed_version"`
-	FixedVersion     string   `json:"fixed_version"`
-}
-
-// VulnerabilityReport vulnerability report
-type VulnerabilityReport struct {
-	CountTotal      int             `json:"count_total"`
-	CountHigh       int             `json:"count_high"`
-	CountMedium     int             `json:"count_medium"`
-	CountLow        int             `json:"count_low"`
-	CountUnknown    int             `json:"count_unknown"`
-	CountIgnore     int             `json:"count_ignore"`
-	CountOpen       int             `json:"count_open"`
-	Vulnerabilities []Vulnerability `json:"vulnerabilities"`
 }
 
 type jsonData map[string]map[string]jsonVulnerability
@@ -146,14 +123,16 @@ func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
 
 	debianId, _, codename := GetOSInfo()
 	if debianId == "ubuntu" {
-		ubuntuBackports(&report, codename)
+		report = ubuntuBackports(&report, codename)
 	}
 	return report
 }
 
 // ubuntuBackports helper function to update CVEs with fixed version numbers in Ubuntu distro.
 // Ubuntu often backport security patches to older versions
-func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) {
+func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) VulnerabilityReport {
+
+	report := NewVulnerabilityReport()
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://people.canonical.com/~ubuntu-security/cvescan/ubuntu-vuln-db-"+codename+".json.bz2", nil)
 	if err != nil {
@@ -179,18 +158,21 @@ func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) {
 				if exists {
 					// update patched version
 					if pkgDetails.Status[0] == "released" {
-						fmt.Printf("Ubuntu Backport for %-12s %-6s %s: Debian Fix:%s Ubuntu Fix:%s \n", vul.PackageName, vul.Severity, vul.CVE, vul.FixedVersion, pkgDetails.Status[1])
+						//fmt.Printf("Ubuntu Backport for %-12s %-6s %s: Debian Fix:%s Ubuntu Fix:%s \n", vul.PackageName, vul.Severity, vul.CVE, vul.FixedVersion, pkgDetails.Status[1])
 						vul.FixedVersion = pkgDetails.Status[1]
+						report.AddVulnerability(vul)
 					}
 				}
 			}
 		}
 	}
+
+	return report
 }
 
 // scans for vulnerabilities in given packages
 func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList) VulnerabilityReport {
-	report := VulnerabilityReport{}
+	report := NewVulnerabilityReport()
 
 	var data jsonData
 	err := json.NewDecoder(source).Decode(&data)
@@ -219,29 +201,9 @@ func scanPackagesFromReader(source io.Reader, installedPackages dpkg.PackageList
 								severity = OPEN
 							}
 
-							// statistics
-							switch severity {
-							case OPEN:
-								report.CountOpen++
-							case HIGH:
-								report.CountHigh++
-							case MEDIUM:
-								report.CountMedium++
-							case LOW:
-								report.CountLow++
-							case IGNORE:
-								report.CountIgnore++
-							case UNKNOWN:
-								report.CountUnknown++
-							}
-
 							if !whitelist.HasCVE(vulnName) {
-								if severity == LOW || severity == MEDIUM || severity == HIGH || severity == OPEN {
-									report.Vulnerabilities = append(report.Vulnerabilities, Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
-								}
+								report.AddVulnerability(Vulnerability{severity, vulnName, vulnNode.Description, pkgName, pkgInstalledVersion, releaseNode.FixedVersion})
 							}
-
-							report.CountTotal++
 						}
 
 					}
