@@ -158,12 +158,14 @@ func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) Vulne
 				if exists {
 					// update patched version
 					if pkgDetails.Status[0] == "released" {
-						//fmt.Printf("Ubuntu Backport for %-12s %-6s %s: Debian Fix:%s Ubuntu Fix:%s \n", vul.PackageName, vul.Severity, vul.CVE, vul.FixedVersion, pkgDetails.Status[1])
 						vul.FixedVersion = pkgDetails.Status[1]
-						report.AddVulnerability(vul)
 					}
 				}
 			}
+		}
+
+		if dpkg.IsAffectedVersion(vul.InstalledVersion, vul.FixedVersion) {
+			report.AddVulnerability(vul)
 		}
 	}
 

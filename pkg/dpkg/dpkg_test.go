@@ -70,6 +70,12 @@ func TestIsAffectedVersionEpocheReturnsTrue1(t *testing.T) {
 	}
 }
 
+func TestIsAffectedVersionEpocheReturnsFalse2(t *testing.T) {
+	if IsAffectedVersion("2:4.11.6+dfsg-0ubuntu1.10", "2:4.11.6+dfsg-0ubuntu1.4") {
+		t.Fail()
+	}
+}
+
 func TestLoadInstalledPackages1(t *testing.T) {
 	packages := LoadInstalledPackages("../../data/dpkg/status")
 	if packages == nil {
