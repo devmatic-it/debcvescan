@@ -17,6 +17,7 @@ package analyzer
 import (
 	"compress/bzip2"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -145,14 +146,14 @@ func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
 
 	debianId, _, codename := GetOSInfo()
 	if debianId == "ubuntu" {
-		ubuntuBackports(report, codename)
+		ubuntuBackports(&report, codename)
 	}
 	return report
 }
 
 // ubuntuBackports helper function to update CVEs with fixed version numbers in Ubuntu distro.
 // Ubuntu often backport security patches to older versions
-func ubuntuBackports(vulnerabilites VulnerabilityReport, codename string) {
+func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://people.canonical.com/~ubuntu-security/cvescan/ubuntu-vuln-db-"+codename+".json.bz2", nil)
 	if err != nil {
@@ -168,7 +169,22 @@ func ubuntuBackports(vulnerabilites VulnerabilityReport, codename string) {
 	var data jsonUbuntuData
 	err = json.NewDecoder(bz2Reader).Decode(&data)
 	if err != nil {
-		println(err) // TODO: Review
+		println(err) // print out some potential errors
+	}
+
+	for _, vul := range vulnerabilites.Vulnerabilities {
+		for cve, details := range data["data"] {
+			if vul.CVE == cve {
+				pkgDetails, exists := details.Releases[codename][vul.PackageName]
+				if exists {
+					// update patched version
+					if pkgDetails.Status[0] == "released" {
+						fmt.Printf("Ubuntu Backport for %-12s %-6s %s: Debian Fix:%s Ubuntu Fix:%s \n", vul.PackageName, vul.Severity, vul.CVE, vul.FixedVersion, pkgDetails.Status[1])
+						vul.FixedVersion = pkgDetails.Status[1]
+					}
+				}
+			}
+		}
 	}
 }
 
