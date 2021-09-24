@@ -15,6 +15,7 @@
 package analyzer
 
 import (
+	"compress/bzip2"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -85,6 +86,16 @@ type jsonRelease struct {
 	Urgency      string `json:"urgency"`
 }
 
+type jsonUbuntuData map[string]map[string]jsonUbuntuVulnerability
+
+type jsonUbuntuVulnerability struct {
+	Releases map[string]map[string]jsonUbuntuRelease `json:"releases"`
+}
+
+type jsonUbuntuRelease struct {
+	Status []string `json:"status"`
+}
+
 // converts urgency to serverity
 func severityFromUrgency(urgency string) Severity {
 	switch urgency {
@@ -113,6 +124,7 @@ func severityFromUrgency(urgency string) Severity {
 func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
 
 	cvejson, err := os.Open("./debcvelist.json")
+	var report VulnerabilityReport
 	if err != nil {
 
 		client := &http.Client{}
@@ -126,11 +138,38 @@ func ScanPackages(installedPackages dpkg.PackageList) VulnerabilityReport {
 			panic(err)
 		}
 
-		return scanPackagesFromReader(resp.Body, installedPackages)
-
+		report = scanPackagesFromReader(resp.Body, installedPackages)
+	} else {
+		report = scanPackagesFromReader(cvejson, installedPackages)
 	}
 
-	return scanPackagesFromReader(cvejson, installedPackages)
+	debianId, _, codename := GetOSInfo()
+	if debianId == "ubuntu" {
+		ubuntuBackports(report, codename)
+	}
+	return report
+}
+
+// ubuntuBackports helper function to update CVEs with fixed version numbers in Ubuntu distro.
+// Ubuntu often backport security patches to older versions
+func ubuntuBackports(vulnerabilites VulnerabilityReport, codename string) {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://people.canonical.com/~ubuntu-security/cvescan/ubuntu-vuln-db-"+codename+".json.bz2", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+
+	bz2Reader := bzip2.NewReader(resp.Body)
+	var data jsonUbuntuData
+	err = json.NewDecoder(bz2Reader).Decode(&data)
+	if err != nil {
+		//panic(err) // TODO: Review
+	}
 }
 
 // scans for vulnerabilities in given packages

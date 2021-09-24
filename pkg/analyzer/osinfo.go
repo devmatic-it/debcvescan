@@ -27,25 +27,30 @@ func GetOSInfo() (string, string, string) {
 	version := "0.0"
 	codename := "none"
 	file, err := os.Open("/etc/os-release")
-	if err == nil {
-		file, _ = os.Open("/usr/lib/os-release")
-	}
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		text := scanner.Text()
-		if strings.HasPrefix(text, "ID=") {
-			id = strings.TrimPrefix(text, "ID=")
-		} else if strings.HasPrefix(text, "VERSION_ID=") {
-			version = strings.TrimPrefix(text, "VERSION_ID=")
-		} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
-			codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
+	if err != nil {
+		file, err = os.Open("/usr/lib/os-release")
+		if err != nil {
+			file, err = os.Open("../../data/os-release")
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	if err == nil {
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			text := scanner.Text()
+			if strings.HasPrefix(text, "ID=") {
+				id = strings.TrimPrefix(text, "ID=")
+			} else if strings.HasPrefix(text, "VERSION_ID=") {
+				version = strings.TrimPrefix(text, "VERSION_ID=\"")
+				version = version[0 : len(version)-1]
+			} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
+				codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
+			}
+		}
 
+		if err := scanner.Err(); err != nil {
+			log.Fatal(err)
+		}
+	}
 	return id, version, codename
 }

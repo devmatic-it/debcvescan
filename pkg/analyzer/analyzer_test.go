@@ -33,9 +33,17 @@ func TestScanPackages(t *testing.T) {
 		t.Fail()
 	}
 
+	ubuntuFile, err := os.Open("../../data/ubuntu-vuln-db-focal.json.bz2")
+	if err != nil {
+		t.Fail()
+	}
+
 	defer gock.Off()
 	gock.New("https://security-tracker.debian.org").
 		Get("/tracker/data/json").Reply(200).Body(file)
+
+	gock.New("https://people.canonical.com").
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-focal.json.bz2").Reply(200).Body(ubuntuFile)
 
 	report := ScanPackages(packages)
 
