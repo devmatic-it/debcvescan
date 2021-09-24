@@ -168,7 +168,7 @@ func ubuntuBackports(vulnerabilites VulnerabilityReport, codename string) {
 	var data jsonUbuntuData
 	err = json.NewDecoder(bz2Reader).Decode(&data)
 	if err != nil {
-		//panic(err) // TODO: Review
+		println(err) // TODO: Review
 	}
 }
 
