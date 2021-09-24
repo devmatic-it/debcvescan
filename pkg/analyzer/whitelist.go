@@ -41,12 +41,11 @@ func NewWhitelist() WhiteList {
 			println("Warning: 'debcvescan.whitelist' is not a valid json array")
 		}
 
+		err = file.Close()
+		if err != nil {
+			println("Warning: 'debcvescan.whitelist' cannot close file")
+		}
 	}
-	err = file.Close()
-	if err != nil {
-		println("Warning: 'debcvescan.whitelist' cannot close file")
-	}
-
 	return result
 }
 
