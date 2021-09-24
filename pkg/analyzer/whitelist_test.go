@@ -24,27 +24,27 @@ func TestWhitelistNew(t *testing.T) {
 
 func TestWhitelistAddCVERemove(t *testing.T) {
 	whitelist := NewWhitelist()
-	whitelist.AddCVE("CVE-1245", "no risk1")
-	whitelist.RemoveCVE("CVE-1245")
+	whitelist.AddCVE("CVE-1", "no risk1")
+	whitelist.RemoveCVE("CVE-1")
 }
 
 func TestWhitelistRemoveCVENotExists(t *testing.T) {
 	whitelist := NewWhitelist()
-	whitelist.AddCVE("CVE-1245", "no risk2")
+	whitelist.AddCVE("CVE-12", "no risk2")
 	whitelist.RemoveCVE("CVE-15")
 }
 
 func TestWhitlistHasCVE(t *testing.T) {
 	whitelist := NewWhitelist()
-	whitelist.AddCVE("CVE-1245", "no risk3")
-	if !whitelist.HasCVE("CVE-1245") {
+	whitelist.AddCVE("CVE-123", "no risk3")
+	if !whitelist.HasCVE("CVE-123") {
 		t.Fail()
 	}
 }
 
 func TestWhitelistHasCVENotExists(t *testing.T) {
 	whitelist := NewWhitelist()
-	whitelist.AddCVE("CVE-1245", "no risk4")
+	whitelist.AddCVE("CVE-1234", "no risk4")
 	if whitelist.HasCVE("CVE-0000") {
 		t.Fail()
 	}

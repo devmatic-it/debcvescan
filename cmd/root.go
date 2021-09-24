@@ -22,6 +22,7 @@ CVE Security Scanner for Debian Linux distributions using official Debian Securi
 I has no dependencies to other libraries and is self-contained compared to the official PERL implementation.
 		`,
 		Run: func(cmd *cobra.Command, args []string) {
+			// empty root command
 		},
 	}
 )

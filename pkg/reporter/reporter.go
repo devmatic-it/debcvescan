@@ -62,7 +62,7 @@ func GenerateSyslogReport(report analyzer.VulnerabilityReport, host string) {
 				log.Fatal(err)
 			}
 
-		} else if vul.Severity == analyzer.MEDIUM {
+		} else if vul.Severity == analyzer.MEDIUM || vul.Severity == analyzer.UNKNOWN {
 			err = sysLog.Warning(message)
 			if err != nil {
 				log.Fatal(err)
@@ -76,12 +76,6 @@ func GenerateSyslogReport(report analyzer.VulnerabilityReport, host string) {
 
 		} else if vul.Severity == analyzer.IGNORE {
 			err = sysLog.Notice(message)
-			if err != nil {
-				log.Fatal(err)
-			}
-
-		} else if vul.Severity == analyzer.UNKNOWN {
-			err = sysLog.Warning(message)
 			if err != nil {
 				log.Fatal(err)
 			}
