@@ -9,10 +9,9 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=security_rating)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=bugs)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
-
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=code_smells)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
 
 The following project checks the installed packages of your Debian Linux distribution against known vulnerabilities of the Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>
-
 
 ## Motivation
 
