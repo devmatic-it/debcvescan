@@ -3,8 +3,16 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/devmatic-it/debcvescan)](https://goreportcard.com/report/github.com/devmatic-it/debcvescan)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/devmatic-it/debcvescan/blob/master/LICENSE)
 [![codecov](https://codecov.io/gh/devmatic-it/debcvescan/branch/master/graph/badge.svg)](https://codecov.io/gh/devmatic-it/debcvescan)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=alert_status)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=security_rating)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=bugs)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=devmatic-it_debcvescan&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=devmatic-it_debcvescan)
+
 
 The following project checks the installed packages of your Debian Linux distribution against known vulnerabilities of the Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>
+
 
 ## Motivation
 
