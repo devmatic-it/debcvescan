@@ -19,6 +19,13 @@ jobs:
     - name: Build
       run: make
 
+    - name: Update resources
+      uses: test-room-7/action-update-file@v1
+      with:
+          file-path: ./coverage.txt
+          commit-msg: Update coverage file for sonarcloud.io
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: codecov upload     
       uses: codecov/codecov-action@v1
       with:
