@@ -148,7 +148,7 @@ func ubuntuBackports(vulnerabilites *VulnerabilityReport, codename string) Vulne
 	var data jsonUbuntuData
 	err = json.NewDecoder(bz2Reader).Decode(&data)
 	if err != nil {
-		println(err) // print out some potential errors
+		println() // something with the bzip2 reader seems not working well
 	}
 
 	for _, vul := range vulnerabilites.Vulnerabilities {
