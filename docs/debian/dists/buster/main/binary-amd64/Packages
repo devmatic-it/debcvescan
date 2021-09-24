@@ -1,5 +1,5 @@
 Package: debcvescan
-Version: 0.1.23
+Version: 0.1.25
 Architecture: amd64
 Maintainer: F. Bator <bator@devmatic-it.com>
 Vendor: Devmatic IT
@@ -7,10 +7,10 @@ Installed-Size: 5996
 Homepage: https://github.com/devmatic-it/debcvescan
 Priority: 
 Section: 
-Filename: pool/main/d/debcvescan/debcvescan_0.1.23_amd64.deb
-Size: 2484270
-SHA256: 960454bd2ba3bac14ac6e9028458310a0fd4960e0c6a9bdcba7cb148bdb87480
-SHA1: 907733ee2c18e78a2fc4149c437319287fcc23de
-MD5sum: 0587ed8c8dedd6d1d7e55e7ff5288a73
+Filename: pool/main/d/debcvescan/debcvescan_0.1.25_amd64.deb
+Size: 2484976
+SHA256: d1142ee8eede9725ecebbd2cd526e19ddb2c3cc543078daec249c60524d52d0c
+SHA1: bd6df453ade3772959a6ddcf75b3b8d130959a78
+MD5sum: f89828f6edd3b596f3af6d62dca93e27
 Description: CVE Security Scanner for Debian Linux distributions using official Debian Security Bug Tracker <https://security-tracker.debian.org/tracker>.
 
