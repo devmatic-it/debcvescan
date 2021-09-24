@@ -18,23 +18,23 @@ import (
 	"testing"
 )
 
-func TestWhitelist_New(t *testing.T) {
+func TestWhitelistNew(t *testing.T) {
 	NewWhitelist()
 }
 
-func TestWhitelist_AddCVERemove(t *testing.T) {
+func TestWhitelistAddCVERemove(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("CVE-1245", "no risk")
 	whitelist.RemoveCVE("CVE-1245")
 }
 
-func TestWhitelist_RemoveCVENotExists(t *testing.T) {
+func TestWhitelistRemoveCVENotExists(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("CVE-1245", "no risk")
 	whitelist.RemoveCVE("CVE-15")
 }
 
-func TestWhitlist_HasCVE(t *testing.T) {
+func TestWhitlistHasCVE(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("CVE-1245", "no risk")
 	if !whitelist.HasCVE("CVE-1245") {
@@ -42,7 +42,7 @@ func TestWhitlist_HasCVE(t *testing.T) {
 	}
 }
 
-func TestWhitelist_HasCVENotExists(t *testing.T) {
+func TestWhitelistHasCVENotExists(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("CVE-1245", "no risk")
 	if whitelist.HasCVE("CVE-0000") {
@@ -50,19 +50,19 @@ func TestWhitelist_HasCVENotExists(t *testing.T) {
 	}
 }
 
-func TestWhitelist_AddPackageRemove(t *testing.T) {
+func TestWhitelistAddPackageRemove(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddPackage("bash", "no risk")
 	whitelist.RemovePackage("bash")
 }
 
-func TestWhitelist_RemovePackageNotExists(t *testing.T) {
+func TestWhitelistRemovePackageNotExists(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddPackage("bash", "no risk")
 	whitelist.RemoveCVE("csh")
 }
 
-func TestWhitlist_HasPackage(t *testing.T) {
+func TestWhitlistHasPackage(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("bash", "no risk")
 	if !whitelist.HasCVE("bash") {
@@ -70,7 +70,7 @@ func TestWhitlist_HasPackage(t *testing.T) {
 	}
 }
 
-func TestWhitelist_HasPackageNotExists(t *testing.T) {
+func TestWhitelistHasPackageNotExists(t *testing.T) {
 	whitelist := NewWhitelist()
 	whitelist.AddCVE("bash", "no risk")
 	if whitelist.HasCVE("csh") {

@@ -16,55 +16,55 @@ package dpkg
 
 import "testing"
 
-func TestIsAffectedVersion_false(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse1(t *testing.T) {
 	if IsAffectedVersion("2.2.4-1ubuntu1.2", "2.0.9-1") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_true(t *testing.T) {
+func TestIsAffectedVersionReturnsTrue(t *testing.T) {
 	if !IsAffectedVersion("1.9.4-1ubuntu1.2", "2.0.9-1") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_false2(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse2(t *testing.T) {
 	if IsAffectedVersion("2.1.5+deb1+cvs20081104-13.2", "2.1.5+deb1+cvs20081104-13.2") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_false3(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse3(t *testing.T) {
 	if IsAffectedVersion("1.12.2-1ubuntu1.1", "1.4.12-1") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_false4(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse4(t *testing.T) {
 	if IsAffectedVersion(" 1.29b-2ubuntu0.1", "1.15.1-3") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_false5(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse5(t *testing.T) {
 	if IsAffectedVersion("2.9.4+dfsg1-6.1ubuntu1.2", "2.9.2+really2.9.1+dfsg1-0.1") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_false6(t *testing.T) {
+func TestIsAffectedVersionReturnsFalse6(t *testing.T) {
 	if IsAffectedVersion("2.30-21ubuntu1~18.04.2", "2.27.51.20161102-1") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_epoche_false1(t *testing.T) {
+func TestIsAffectedVersionEpocheReturnsFalse1(t *testing.T) {
 	if IsAffectedVersion("2:8.0.1453-1ubuntu1.1", "1:7.1.314-3") {
 		t.Fail()
 	}
 }
 
-func TestIsAffectedVersion_epoche_true1(t *testing.T) {
+func TestIsAffectedVersionEpocheReturnsTrue1(t *testing.T) {
 	if !IsAffectedVersion("1:7.1.314-3", "2:8.0.1453-1ubuntu1.1") {
 		t.Fail()
 	}
