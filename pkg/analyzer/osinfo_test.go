@@ -5,7 +5,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +23,10 @@ func TestGetOSInfo(t *testing.T) {
 	if id != "ubuntu" {
 		t.Error("id != ubuntu")
 	}
-	if version != "20.04" {
-		t.Error("version != 20.04")
+	if version != "22.04" {
+		t.Error("version != 22.04")
 	}
-	if code != "focal" {
-		t.Error("code != focal")
+	if code != "jammy" {
+		t.Error("code != jammy")
 	}
 }
