@@ -4717,3 +4717,4 @@ github.com/devmatic-it/debcvescan/pkg/analyzer/whitelist.go:139.28,141.16 2 10
 github.com/devmatic-it/debcvescan/pkg/analyzer/whitelist.go:145.2,146.16 2 10
 github.com/devmatic-it/debcvescan/pkg/analyzer/whitelist.go:141.16,142.13 1 0
 github.com/devmatic-it/debcvescan/pkg/analyzer/whitelist.go:146.16,147.13 1 0
+mode: atomic
