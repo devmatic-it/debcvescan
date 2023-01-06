@@ -5,7 +5,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,6 +44,9 @@ func TestScanPackages(t *testing.T) {
 
 	gock.New("https://people.canonical.com").
 		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-focal.json.bz2").Reply(200).Body(ubuntuFile)
+
+	gock.New("https://people.canonical.com").
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-jammy.json.bz2").Reply(200).Body(ubuntuFile)
 
 	report := ScanPackages(packages)
 
