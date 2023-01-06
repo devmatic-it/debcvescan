@@ -28,9 +28,13 @@ changelog:
 nfpms:  
   - id: debcvescan
     package_name: debcvescan
-    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    file_name_template: >-
+          {{ .ProjectName }}_
+          {{- title .Os }}_
+          {{- if eq .Arch "386" }}i386
+          {{- else }}{{ .Arch }}{{ end }}
     builds:
-    - debcvescan    
+    - debcvescan
 
     vendor: Devmatic IT
     homepage: https://github.com/devmatic-it/debcvescan
