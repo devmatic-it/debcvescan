@@ -32,9 +32,6 @@ nfpms:
     builds:
     - debcvescan    
 
-    replacements:      
-      386: i386
-
     vendor: Devmatic IT
     homepage: https://github.com/devmatic-it/debcvescan
     maintainer: F. Bator <bator@devmatic-it.com>
