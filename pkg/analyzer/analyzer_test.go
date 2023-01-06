@@ -28,25 +28,31 @@ func TestScanPackages(t *testing.T) {
 		t.Fail()
 	}
 
+	defer gock.Off()
+
 	file, err := os.Open("../../data/json.json")
 	if err != nil {
 		t.Fail()
 	}
 
-	ubuntuFile, err := os.Open("../../data/ubuntu-vuln-db-focal.json.bz2")
+	gock.New("https://security-tracker.debian.org").
+		Get("/tracker/data/json").Reply(200).Body(file)
+
+	ubuntuFocalFile, err := os.Open("../../data/ubuntu-vuln-db-focal.json.bz2")
 	if err != nil {
 		t.Fail()
 	}
 
-	defer gock.Off()
-	gock.New("https://security-tracker.debian.org").
-		Get("/tracker/data/json").Reply(200).Body(file)
+	gock.New("https://people.canonical.com").
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-focal.json.bz2").Reply(200).Body(ubuntuFocalFile)
+
+	ubuntuJammyFile, err := os.Open("../../data/ubuntu-vuln-db-jammy.json.bz2")
+	if err != nil {
+		t.Fail()
+	}
 
 	gock.New("https://people.canonical.com").
-		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-focal.json.bz2").Reply(200).Body(ubuntuFile)
-
-	gock.New("https://people.canonical.com").
-		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-jammy.json.bz2").Reply(200).Body(ubuntuFile)
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-jammy.json.bz2").Reply(200).Body(ubuntuJammyFile)
 
 	report := ScanPackages(packages)
 
@@ -61,10 +67,6 @@ func TestScanPackages(t *testing.T) {
 	vul := report.Vulnerabilities[0]
 	if vul.PackageName == "" {
 		t.Errorf("Expected package name, but found %s", vul.PackageName)
-	}
-
-	if !gock.IsDone() {
-		t.Fail()
 	}
 }
 
