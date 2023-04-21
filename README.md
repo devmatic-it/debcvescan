@@ -82,6 +82,9 @@ sudo apt-get install debcvescan
 4. export scan report to JSON: `debcvescan scan --format=json`
 ![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_scan_json.png)
 
+5. scan/pkg an alternative filepath (global flag)
+![debcvescan scan](https://github.com/devmatic-it/debcvescan/blob/master/docs/img/debcvescan_file.PNG)
+
 ## Contribute
 
 ### New Issues
