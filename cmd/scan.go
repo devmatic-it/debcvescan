@@ -40,5 +40,10 @@ var scanCmd = &cobra.Command{
 		case "syslog":
 			reporter.GenerateSyslogReport(report, syslogHost)
 		}
+
+		filePath, _ := rootCmd.Flags().GetString("file")
+		if filePath == "" {
+			filePath = defaultFilePath
+		}
 	},
 }

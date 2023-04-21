@@ -10,6 +10,24 @@ import (
 	"fmt"
 )
 
+// contains the optional external filepath
+var filePath string
+
+//default system path of package list
+const defaultFilePath = "/var/lib/dpkg/status"
+
+func init() {
+	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVarP(&filePath, "file", "p", defaultFilePath, "external file path")
+}
+
+func initConfig() {
+	filePath, _ := rootCmd.Flags().GetString("file")
+	if filePath == "" {
+		filePath = defaultFilePath
+	}
+}
+
 // config variables
 var (
 	rootCmd = &cobra.Command{
@@ -39,7 +57,7 @@ func Execute() {
 func analyze() analyzer.VulnerabilityReport {
 
 	// load installed packages
-	installedPackages := dpkg.LoadInstalledPackages("/var/lib/dpkg/status")
+	installedPackages := dpkg.LoadInstalledPackages(filePath)
 	// scan for vulnerabilties
 	vulnerabilities := analyzer.ScanPackages(installedPackages)
 	return vulnerabilities
