@@ -23,10 +23,14 @@ import (
 
 // GetOSInfo returns information about the Debian distro
 func GetOSInfo() (string, string, string) {
+	return getOSInfoFromFile("/etc/os-release")
+}
+
+func getOSInfoFromFile(path string) (string, string, string) {
 	id := "debian"
 	version := "0.0"
 	codename := "none"
-	file, err := os.Open("/etc/os-release")
+	file, err := os.Open(path)
 	if err != nil {
 		file, err = os.Open("/usr/lib/os-release")
 		if err != nil {
@@ -42,7 +46,9 @@ func GetOSInfo() (string, string, string) {
 				id = strings.TrimPrefix(text, "ID=")
 			} else if strings.HasPrefix(text, "VERSION_ID=") {
 				version = strings.TrimPrefix(text, "VERSION_ID=\"")
-				version = version[0 : len(version)-1]
+				if len(version) > 0 && version[len(version)-1] == '"' {
+					version = version[:len(version)-1]
+				}
 			} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
 				codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
 			}
