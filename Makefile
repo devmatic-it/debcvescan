@@ -19,13 +19,22 @@ get:
 	GOBIN=$(GOBIN) go get
 
 security:
+	@echo "Running govulncheck..."
+	govulncheck ./...
 	@echo "Gosec security scan..."
 	dist/gosec ./...
+
+update-deps:
+	@echo "Updating dependencies..."
+	go get -u ./...
+	go mod tidy
 
 build:
 	@echo "Building binary..."
 	GOBIN=$(GOBIN) go build -o dist/debcvescan
 	
+test-all: test-coverage
+
 test-coverage:
 	@go test -short -coverprofile cover.out -covermode=atomic ${PKG_LIST} 
 	@cat cover.out >> coverage.txt
