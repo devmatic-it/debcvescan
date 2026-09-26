@@ -21,7 +21,7 @@ jobs:
           go-version: '1.23'
 
       - name: Run golangci-lint
-        uses: vez/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v6
         with:
           version: latest
 
