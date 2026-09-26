@@ -34,7 +34,7 @@ func getOSInfoFromFile(path string) (string, string, string) {
 	if err != nil {
 		file, err = os.Open("/usr/lib/os-release")
 		if err != nil {
-			file, err = os.Open("../../data/os-release")
+			file, err = os.Open("../../data/os-release") // nosec:G304
 		}
 	}
 
