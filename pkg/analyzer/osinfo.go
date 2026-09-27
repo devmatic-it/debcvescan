@@ -21,42 +21,67 @@ import (
 	"strings"
 )
 
+type osSource int
+
+const (
+	sourceEtcOSRelease osSource = iota
+	sourceUsrLibOsRelease
+	sourceDataFallback
+)
+
 // GetOSInfo returns information about the Debian distro
 func GetOSInfo() (string, string, string) {
-	return getOSInfoFromFile("/etc/os-release")
+	id, version, codename := getOSInfoFromFile(sourceEtcOSRelease)
+	if id == "" {
+		id, version, codename = getOSInfoFromFile(sourceUsrLibOsRelease)
+	}
+	if id == "" {
+		id, version, codename = getOSInfoFromFile(sourceDataFallback)
+	}
+	return id, version, codename
 }
 
-func getOSInfoFromFile(path string) (string, string, string) {
+func getOSInfoFromFile(source osSource) (string, string, string) {
+	var path string
+	switch source {
+	case sourceEtcOSRelease:
+		path = "/etc/os-release"
+	case sourceUsrLibOsRelease:
+		path = "/usr/lib/os-release"
+	case sourceDataFallback:
+		path = "../../data/os-release"
+	default:
+		return "", "", ""
+	}
+
 	id := "debian"
 	version := "0.0"
 	codename := "none"
-	file, err := os.Open(path)
+
+	file, err := os.Open(path) // nosec G304
 	if err != nil {
-		file, err = os.Open("/usr/lib/os-release")
-		if err != nil {
-			file, err = os.Open("../../data/os-release") // nosec:G304
-		}
+		return "", "", ""
 	}
+	defer file.Close()
 
-	if err == nil {
-		scanner := bufio.NewScanner(file)
-		for scanner.Scan() {
-			text := scanner.Text()
-			if strings.HasPrefix(text, "ID=") {
-				id = strings.TrimPrefix(text, "ID=")
-			} else if strings.HasPrefix(text, "VERSION_ID=") {
-				version = strings.TrimPrefix(text, "VERSION_ID=\"")
-				if len(version) > 0 && version[len(version)-1] == '"' {
-					version = version[:len(version)-1]
-				}
-			} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
-				codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		text := scanner.Text()
+		if strings.HasPrefix(text, "ID=") {
+			id = strings.TrimPrefix(text, "ID=")
+		} else if strings.HasPrefix(text, "VERSION_ID=") {
+			version = strings.TrimPrefix(text, "VERSION_ID=\"")
+			if len(version) > 0 && version[len(version)-1] == '"' {
+				version = version[:len(version)-1]
 			}
-		}
-
-		if err := scanner.Err(); err != nil {
-			log.Fatal(err)
+		} else if strings.HasPrefix(text, "VERSION_CODENAME=") {
+			codename = strings.TrimPrefix(text, "VERSION_CODENAME=")
 		}
 	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
 	return id, version, codename
 }

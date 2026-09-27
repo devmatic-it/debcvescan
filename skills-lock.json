@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "gh-fix-ci": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/gh-fix-ci/SKILL.md",
+      "computedHash": "1b1ce4eeeae2bfc175d05f1b69e07b17dfa1fddf99a96c22b6dcae7e5fb4e550"
+    }
+  }
+}

@@ -16,7 +16,8 @@ permissions:
 
 # Workflow: The Autonomous Developer Loop
 
-When the user types `/loop <idea>`, orchestrate the development process by cycling through the specialized roles defined in `.agents/AGENTS.md`.
+Orchestrate the development process by cycling through the specialized roles defined in `.agents/AGENTS.md`.
+Clearly state the phase you ae working on.
 
 ## Prerequisites
 
@@ -28,7 +29,7 @@ When the user types `/loop <idea>`, orchestrate the development process by cycli
 
 - **Action**: Execute `write_specs` using the `<idea>`.
 - **Requirement**: Present a structured Technical Specification.
-- **Gate**: **STOP** and wait for user approval. 
+- **Gate**: **STOP** and wait for user approval.
 - **Iteration**: If the user provides feedback or edits the spec, re-run `write_specs` to revise. Continue until the user explicitly types **"Approved"**.
 
 ### 2. Implementation Phase (Full-Stack Engineer @engineer)

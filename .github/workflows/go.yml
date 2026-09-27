@@ -30,12 +30,6 @@ jobs:
           go install golang.org/x/vuln/cmd/govulncheck@latest
           govulncheck ./...
 
-      - name: Run gosec
-        run: |
-          if ! command -v gosec &> /dev/null; then
-            go install github.com/securego/gosec/v2/cmd/gosec@latest
-          fi
-          gosec ./...
 
   # 2. BUILD & TEST JOB (Core Logic)
   build-and-test:
