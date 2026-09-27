@@ -52,7 +52,13 @@ func TestScanPackages(t *testing.T) {
 	}
 
 	gock.New("https://people.canonical.com").
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-focal.json.bz2").Reply(200).Body(ubuntuFocalFile)
+
+	gock.New("https://people.canonical.com").
 		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-jammy.json.bz2").Reply(200).Body(ubuntuJammyFile)
+
+	gock.New("https://people.canonical.com").
+		Get("/~ubuntu-security/cvescan/ubuntu-vuln-db-noble.json.bz2").Reply(200).Body(ubuntuJammyFile) // Using jammy as fallback for noble in tests
 
 	report := ScanPackages(packages)
 

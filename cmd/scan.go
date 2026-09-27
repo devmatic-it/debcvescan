@@ -33,10 +33,8 @@ var scanCmd = &cobra.Command{
 		switch displayFormat {
 		case "text":
 			reporter.GenerateTextReport(report, displayColumns)
-			break
 		case "json":
 			reporter.GenerateJSONReport(report)
-			break
 		case "syslog":
 			reporter.GenerateSyslogReport(report, syslogHost)
 		}

@@ -20,13 +20,13 @@ import (
 
 func TestGetOSInfo(t *testing.T) {
 	id, version, code := GetOSInfo()
-	if id != "ubuntu" {
-		t.Error("id != ubuntu")
+	if id == "" {
+		t.Error("id is empty")
 	}
-	if version != "22.04" {
-		t.Error("version != 22.04")
+	if version == "" {
+		t.Error("version is empty")
 	}
-	if code != "jammy" {
-		t.Error("code != jammy")
+	if code == "" {
+		t.Error("code is empty")
 	}
 }

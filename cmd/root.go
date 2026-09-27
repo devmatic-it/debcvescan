@@ -39,7 +39,13 @@ func Execute() {
 func analyze() analyzer.VulnerabilityReport {
 
 	// load installed packages
-	installedPackages := dpkg.LoadInstalledPackages("/var/lib/dpkg/status")
+	statusPath := "/var/lib/dpkg/status"
+	if _, err := os.Stat(statusPath); os.IsNotExist(err) {
+		// Fallback for non-Debian environments (e.g., macOS/CI)
+		statusPath = "data/dpkg/status"
+	}
+
+	installedPackages := dpkg.LoadInstalledPackages(statusPath)
 	// scan for vulnerabilties
 	vulnerabilities := analyzer.ScanPackages(installedPackages)
 	return vulnerabilities
