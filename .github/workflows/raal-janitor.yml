@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: '0 0 * * 1' # Every Monday at midnight
   workflow_dispatch: # Allows manual triggering for testing
-  dependency_update:
-    types: [scheduled]
 
 jobs:
   raal-maintenance:
@@ -39,6 +37,4 @@ jobs:
         run: |
           echo "Starting RAAL Agent Loop..."
           # In a real production environment, the agent is invoked here.
-          # The agent uses 'gh' to interact with issues and PRs.
-          # For this deployment, we ensure the environment is ready for the agent binary.
           echo "Agent initialized and waiting for task assignment..."
