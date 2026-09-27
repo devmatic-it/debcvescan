@@ -1,7 +1,6 @@
-# RAAL Observe
-
-description: Captures the current state of the repository, including file contents, command outputs, and environment metadata.
-
+---
+name: "raal_observe"
+description: "Reflective Agentic Loop (RAAL) - Observe: Captures the current state of the repository, including file contents, command outputs, and environment metadata."
 ---
 
 # Workflow

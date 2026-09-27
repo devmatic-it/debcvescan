@@ -1,7 +1,6 @@
-# RAAL Reflect
-
-description: Analyzes observations and compares them against the Long-Term Memory (LTM) to decide the next step in the RAAL loop.
-
+---
+name: "raal_reflect"
+description: "Reflective Agentic Loop (RAAL) - Reflect: Analyzes observations and compares them against the Long-Term Memory (LTM) to decide the next step in the RAAL loop."
 ---
 
 # Workflow

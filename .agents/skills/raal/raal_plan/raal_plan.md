@@ -1,7 +1,6 @@
-# RAAL Plan
-
-description: Generates a multi-step strategy based on the reflection to achieve the target goal.
-
+---
+name: "raal_plan"
+description: "Reflective Agentic Loop (RAAL) - Plan: Generates a multi-step strategy based on the reflection to achieve the target goal."
 ---
 
 # Workflow

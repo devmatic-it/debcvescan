@@ -1,7 +1,6 @@
-# RAAL Verify
-
-description: Validates the integrity of changes by running targeted tests and security audits.
-
+---
+name: "raal_verify"
+description: "Reflective Agentic Loop (RAAL) - Verify: Validates the integrity of changes by running targeted tests and security audits."
 ---
 
 # Workflow

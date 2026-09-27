@@ -1,7 +1,6 @@
-# RAAL Execute
-
-description: Performs atomic, single-purpose actions such as shell commands or git operations.
-
+---
+name: "raal_execute"
+description: "Reflective Agentic Loop (RAAL) - Execute: Performs atomic, single-purpose actions such as shell commands or git operations."
 ---
 
 # Workflow
