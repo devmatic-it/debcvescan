@@ -18,11 +18,11 @@ All autonomous agents must follow the **Reflective Agentic Loop (RAAL)**. See [B
 - **Goal**: Deliver high-quality, tested code slices.
 
 ### 3. The Auditor (QA & Security)
-- **Role**: Validates the integrity of the codebase and agent actions.
-- **Responsibility**: Executes the **Verification Gate** (Unit, Regression, and Security audits).
+- **Role**: Provides validation results for the Verification Gate.
+- **Responsibility**: Executes Unit, Regression, and Security audits as requested by the Orchestrator.
 - **Goal**: Ensure zero regressions and strict adherence to security standards.
 
 ### 4. The Planner (Orchestrator)
-- **Role**: High-level task decomposition and loop management.
-- **Responsibility**: Breaks down user requests into actionable slices and manages the agent state machine.
-- **Goal**: Optimize the "Autonomy Ratio" by providing clear, actionable instructions to specialized agents.
+- **Role**: Implements the `raal_orchestrator` skill.
+- **Responsibility**: Manages the RAAL state machine and handles task decomposition into independent sub-tasks.
+- **Goal**: Optimize the "Autonomy Ratio" by managing task lifecycles from assignment to completion or suspension.

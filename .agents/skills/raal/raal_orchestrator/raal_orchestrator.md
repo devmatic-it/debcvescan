@@ -25,6 +25,7 @@ Use `raal_reflect` to analyze the observation:
 
 ### 3. Plan
 Use `raal_plan` to generate a sequence of atomic actions (e.g., `git checkout`, `sed`, `go test`) based on the reflection and historical context.
+- **Sub-task Management**: If a task is decomposed into multiple sub-tasks, treat each sub-task as an independent RAAL loop. A failure in one sub-task triggers the `ESCALATING` state for that specific sub-task only.
 
 ### 4. Act
 Execute the planned actions using `raal_execute`.
@@ -39,9 +40,12 @@ Execute `raal_verify` to ensure no regressions were introduced. This is a mandat
 
 ## Escalation Protocol
 When you reach the **ESCALATING** state, use `gh issue comment` to post a structured **Maintenance Briefing** containing:
+- The sub-task ID/name.
 - The error signature.
 - The diagnostic context (the last `observation`).
 - A summary of the failed recovery attempts.
 
+After posting, enter the **SUSPENDED** state and wait for human feedback/resumption.
+
 ---
-*Skill Version: 1.1.0*
+*Skill Version: 1.2.1*
