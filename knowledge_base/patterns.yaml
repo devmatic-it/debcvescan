@@ -1,0 +1,32 @@
+# RAAL Pattern Registry
+
+patterns:
+  - id: pattern_001
+    type: SECURITY_EXCEPTION
+    target:
+      file: "pkg/analyzer/osinfo.go"
+      line_context: "os.Open(path) // nosec G304"
+      rule_id: "G304"
+    reasoning: >
+      Controlled file access for OS detection. 
+      Path is validated via the osSource enum in getOSInfoFromFile.
+    status: APPROVED
+
+  - id: pattern_002
+    type: ARCHITECTURAL_STYLE
+    target:
+      package: "pkg/analyzer"
+      pattern: "fallback_chain"
+    description: >
+      OS info must follow the strict fallback sequence: 
+      /etc/os-release -> /usr/lib/os-release -> ../../data/dpkg/status.
+    status: ENFORCED
+
+  - id: pattern_003
+    type: LOGGING_STANDARD
+    target:
+      package: "pkg/analyzer"
+      pattern: "slog_usage"
+    description: >
+      All package errors must use slog.Error with structured context.
+    status: ENFORCED
