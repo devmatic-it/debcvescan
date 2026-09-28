@@ -10,9 +10,24 @@ permissions:
   - action: shell
     resource: "*"
     effect: allow
-  - action: subagents
+  - action: edit
+    resource: "*"
+    effect: allow 
+  - action: read
     resource: "*"
     effect: allow    
+  - action: skills
+    resource: "*"
+    effect: allow    
+  - action: grep
+    resource: "*"
+    effect: allow    
+  - action: websearch
+    resource: "*"
+    effect: allow    
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 # Workflow

@@ -1,33 +1,25 @@
----
-name: "raal_verify"
-description: "Reflective Agentic Loop (RAAL) - Verify: Validates the integrity of changes by running targeted tests and security audits."
----
+# Skill: raal_verify
 
-# Workflow
+## Description
+A mandatory validation stage that checks not only the immediate fix but also ensures no regressions were introduced in adjacent modules. It is the final stage of the RAAL loop.
 
-## Objective
+## Input
+- `target_module`: The module/file modified by the current implementation loop.
+- `test_suite`: The set of tests (Unit, Regression, Security) to be executed.
 
-Your goal is to ensure that the actions performed by the agent have achieved the desired outcome without introducing regressions or security vulnerabilities.
+## Process
+1. **Unit Verification**: Execute tests specifically related to the changes in `target_module`.
+2. **Regression Verification**: Execute the full relevant test suite for the entire project/package to ensure no side effects.
+3. **Security Audit**: Run static analysis tools (e.g., `gosec`) on the modified code and its dependencies.
+4. **Decision**: 
+    - If all tests pass $\rightarrow$ Return `SUCCESS`.
+    - If any test fails $\rightarrow$ Return `FAILURE` with error details.
 
-## Rules of Engagement
+## Output
+- A verification report containing:
+    - `status`: SUCCESS or FAILURE.
+    - `details`: Summary of test results and security findings.
 
-- **Mandatory Gate**: No task is considered "Complete" until the `raal_verify` skill returns a successful status.
-- **Regression Focus**: You must not only check if the specific bug is fixed but also ensure that existing functionality remains intact.
-- **Security Compliance**: You must perform a static analysis (e.g., `gosec`) to ensure no new security vulnerabilities were introduced.
-
-## Instructions
-
-1. **Identify Verification Scope**: Determine the required tests based on the changes made (e.g., unit tests for logic, regression suite for stability, `gosec` for security).
-2. **Execute Tests**: Run the designated test suites (e.g., `go test ./...`).
-3. **Perform Security Audit**: Run the security scanner (e.g., `gosec`) on the modified files and their dependencies.
-4. **Compile Results**: Aggregate all results into a structured report.
-
-## Verification Requirements (The Gate)
-
-A verification is successful only if:
-- **Unit Tests**: All relevant unit tests pass.
-- **Regression Suite**: The full project test suite passes with no failures.
-- **Security Audit**: No high or medium severity vulnerabilities are detected.
-
----
-*Skill Version: 1.0.0*
+## Constraints
+- Must be executed in a clean environment (e.g., the dedicated Git worktree) to ensure results are not polluted by local state.
+- A task is only considered `COMPLETED` if the status is `SUCCESS`.

@@ -1,0 +1,24 @@
+# RAAL Agent Configuration
+
+## Environment
+- **Working Directory**: ${CURRENT_WORKING_DIR}
+- **Memory Root**: .agents/memory/
+
+## Memory Paths
+- **Short-Term Memory (STM)**: .agents/memory/sessions/STATE.md
+- **Long-Term Memory (LTM)**: .agents/memory/knowledge_base/
+  - **Patterns**: .agents/memory/knowledge_base/patterns.yaml
+  - **Failure History**: .agents/memory/knowledge_base/failure_history.yaml
+
+## Skillset
+- raal_observe
+- raal_reflect
+- raal_plan
+- raal_execute
+- raal_verify
+- raal_orchestrator
+
+## Constraints
+- All implementation must occur in a dedicated Git worktree.
+- No direct modification of the main branch; all changes must pass through `raal_verify`.
+- All tool outputs must be logged via `raal_observe`.

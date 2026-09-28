@@ -1,32 +1,20 @@
----
-name: "raal_observe"
-description: "Reflective Agentic Loop (RAAL) - Observe: Captures the current state of the repository, including file contents, command outputs, and environment metadata."
----
+# Skill: raal_observe
 
-# Workflow
+## Description
+Ingests raw tool outputs (stdout/stderr), file contents, and environment metadata. It is the first stage of the RAAL loop.
 
-## Objective
+## Input
+- `tool_output`: The raw string output from a tool execution.
+- `environment_metadata`: Contextual information about the current environment (e.g., working directory, OS).
 
-Your goal is to provide a structured observation of the current environment or specific files/commands. This data is used by the `raal_reflect` skill to make decisions.
+## Process
+1. **Format**: Convert raw output into a structured format (timestamp, tool name, status).
+2. **Log**: Append the formatted output to `.agents/memory/sessions/STATE.md`.
+3. **Check Context**: If `STATE.md` exceeds the token threshold, trigger a summarization routine before appending.
 
-## Rules of Engagement
+## Output
+- Returns the updated state of `STATE.md` and a confirmation of successful logging.
 
-- **Scope**: You can observe files, directory structures, git status, and command outputs.
-- **Output Format**: All observations must be returned in a structured format (JSON or YAML) to ensure the next skill in the loop can parse them.
-- **No Modification**: This skill is read-only. You must never attempt to change the state of the repository during an observation.
-
-## Instructions
-
-1. **Identify Target**: Determine if you are observing a file, a directory, or the output of a specific command.
-2. **Capture Data**: 
-   - For files: Read the content and metadata (permissions, size).
-   - For commands: Capture `stdout`, `stderr`, and the exit code.
-   - For git: Use `git status` or `git diff`.
-3. **Structure Output**: Format the captured data into a structured object containing:
-   - `source`: (e.g., "file", "shell", "git")
-   - `content`: The raw output or file content.
-   - `error`: Any error message from the command/file read.
-   - `exit_code`: The exit status of the command.
-
----
-*Skill Version: 1.0.0*
+## Constraints
+- Must never overwrite `STATE.md`; always append to maintain history within the current session.
+- Must handle empty tool outputs gracefully.

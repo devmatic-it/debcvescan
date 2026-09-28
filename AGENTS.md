@@ -14,7 +14,7 @@ All autonomous agents must follow the **Reflective Agentic Loop (RAAL)**. See [B
 
 ### 2. The Engineer (Feature Developer)
 - **Role**: Implements new features and refactors existing code.
-- **Responsibility**: Follows the RAAL loop to implement features, ensuring every change is verified by unit and regression tests.
+- **Responsibility**: Follows the RAAL loop to implement features, ensuring every change is verified by unit and regression tests. **Each implementation loop must be executed within a dedicated Git worktree to ensure isolation from the main codebase.**
 - **Goal**: Deliver high-quality, tested code slices.
 
 ### 3. The Auditor (QA & Security)
@@ -24,5 +24,5 @@ All autonomous agents must follow the **Reflective Agentic Loop (RAAL)**. See [B
 
 ### 4. The Planner (Orchestrator)
 - **Role**: Implements the `raal_orchestrator` skill.
-- **Responsibility**: Manages the RAAL state machine and handles task decomposition into independent sub-tasks.
+- **Responsibility**: Manages the RAAL state machine and handles task decomposition into independent sub-tasks. **The Orchestrator manages parallel implementation loops by spawning sub-agents and is responsible for merging completed worktrees back into the main branch.**
 - **Goal**: Optimize the "Autonomy Ratio" by managing task lifecycles from assignment to completion or suspension.
