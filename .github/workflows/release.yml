@@ -16,12 +16,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate GO releaser config
-        uses: goreleaser/goreleaser-action@v12
+        uses: goreleaser/goreleaser-action@v5
         with:
           args: check
 
       - name: Create release on GitHub
-        uses: goreleaser/goreleaser-action@v12
+        uses: goreleaser/goreleaser-action@v5
         with:
           args: release
         env:
